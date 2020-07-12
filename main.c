@@ -20,5 +20,6 @@
 	else
 		parse(argv);
 	printf ("Exiting the simulation.....\n");
+	while (1);
 	return (0);	 
  }

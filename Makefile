@@ -11,6 +11,9 @@ cub3d.c \
 get_next_line.c \
 get_next_line_utils.c \
 parser_utils.c \
+parsing_errors.c \
+parsing2.c \
+ft_atoi.c \
 
 
 HEADERS =	cube3d.h \

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include "cub3d.h"
 
 
 int		ft_isspace(char c)
@@ -28,11 +28,63 @@ int		ft_isdigit(int c)
 	return (0);
 }
 
-void	parse_error_mes(char c)
+int		count_spaces(char *line)
 {
-	if (c == 'u')
-	{
-		printf ("Error - unexpected character in map file\n");
-	}
-	
+	int counter;
+
+	counter = 0;
+	while (ft_isspace(line[counter]))
+		counter++;
+	return (counter);
 }
+
+char	*remove_spaces(char *line)
+{
+	while (ft_isspace(*line))
+		line++;
+	return (line);
+}
+
+char	*remove_digits(char *line)
+{
+	while (ft_isdigit(*line))
+		line++;
+	return (line);
+}
+
+int		get_min(int x, int y)
+{
+	if (x > y)
+		return (y);
+	else
+		return (x);
+}
+
+void	ft_bzero(void *s, size_t n)
+{
+	size_t	i;
+	char	*p;
+
+	p = s;
+	i = 0;
+	while (i < n)
+	{
+		p[i] = '\0';
+		i++;
+	}
+}
+
+void	*ft_calloc(size_t count, size_t size)
+{
+	void	*p;
+	size_t	total;
+
+	total = count * size;
+	p = malloc(total);
+	if (p == 0)
+		return (NULL);
+	else
+		ft_bzero(p, total);
+	return (p);
+}
+

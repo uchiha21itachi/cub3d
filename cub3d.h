@@ -15,6 +15,7 @@
 
 # include "minilibx/mlx.h"
 # include <stdio.h>
+# include <stdlib.h>
 #include "get_next_line.h"
 
 typedef	struct	s_img {
@@ -32,14 +33,18 @@ typedef struct s_mlx {
 }				t_mlx;
 
 typedef struct s_parse {
-	int		res_x;
-	int		res_y;
-	char	*no_path;
-	char	*so_path;
-	char	*we_path;
-	char	*ea_path;
-	char	*s_path;
-}				t_parse;;
+	int			res_x;
+	int			res_y;
+	int			**map;
+	int			map_x;
+	int			map_y;
+	char		*no_path;
+	char		*so_path;
+	char		*we_path;
+	char		*ea_path;
+	char		*s_path;
+	int			map_start;
+}				t_parse;
 
 
 void		parse(char **f);
@@ -47,7 +52,22 @@ void		parse(char **f);
 //parser_utils.c
 int		ft_isspace(char c);
 int		ft_isdigit(int c);
-void	parse_error_mes(char c);
+int		count_spaces(char *line);
+char	*remove_spaces(char *line);
+char	*remove_digits(char *line);
+int		get_min(int x, int y);
+void	*ft_calloc(size_t count, size_t size);
 
+
+//parsing_errors.c
+void	parsing_error_messege(char c);
+void	print_parse_data(t_parse p_data);
+
+//parsing2.c
+t_parse		*parse_data_init(t_parse *p_data);
+t_parse		*parse_map(char *line, t_parse *p_data, int spaces);
+
+//ft_atoi.c
+int			ft_atoi(const char *str);
 
 #endif
