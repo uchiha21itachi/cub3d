@@ -14,11 +14,17 @@
 
  int main (int argc, char **argv)
  {
+	int		map_y_size;
+
 	printf ("Number of arguments - %d\n", argc);
 	if (argc < 2 || argc > 3)
 		printf ("Wrong Number of arguments\n");
 	else
-		parse(argv);
+	{
+		map_y_size = calculate_map_y_size(argv[1]);
+		printf("map y count - %d\n\n\n\n", map_y_size);
+		parse(argv, map_y_size);
+	}
 	printf ("Exiting the simulation.....\n");
 	while (1);
 	return (0);	 

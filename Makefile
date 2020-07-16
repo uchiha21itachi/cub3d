@@ -8,11 +8,14 @@ NAME = cub3D
 
 SRCS =	main.c \
 cub3d.c \
+utils.c \
+parsing.c \
+parsing_texture.c \
+parsing_map.c \
+parsing_utils.c \
+parsing_errors.c \
 get_next_line.c \
 get_next_line_utils.c \
-parser_utils.c \
-parsing_errors.c \
-parsing2.c \
 ft_atoi.c \
 
 

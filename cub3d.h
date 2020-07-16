@@ -46,8 +46,22 @@ typedef struct s_parse {
 	int			map_start;
 }				t_parse;
 
+//utils.c
+int		calculate_map_y_size(char *file);
 
-void		parse(char **f);
+//parsing.c
+void	parse(char **file, int map_y_size);
+t_parse		*parse_data_init(t_parse *p_data, int map_y_size);
+t_parse		*check_line(char *line, t_parse *p_data);
+t_parse		*get_resolution(char *line, t_parse *p_data);
+
+
+//parsing_texture.c
+t_parse		*get_tex_path(char *line, t_parse *p_data);
+
+
+//parsing_map.c
+t_parse		*parse_map(char *line, t_parse *p_data, int spaces);
 
 //parser_utils.c
 int		ft_isspace(char c);
@@ -58,14 +72,9 @@ char	*remove_digits(char *line);
 int		get_min(int x, int y);
 void	*ft_calloc(size_t count, size_t size);
 
-
 //parsing_errors.c
 void	parsing_error_messege(char c);
-void	print_parse_data(t_parse p_data);
-
-//parsing2.c
-t_parse		*parse_data_init(t_parse *p_data);
-t_parse		*parse_map(char *line, t_parse *p_data, int spaces);
+void	print_parse_data(t_parse *p_data);
 
 //ft_atoi.c
 int			ft_atoi(const char *str);
