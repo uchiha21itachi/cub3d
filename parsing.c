@@ -22,24 +22,20 @@ t_parse		*get_resolution(char *line, t_parse *p_data)
 
 t_parse		*check_line(char *line, t_parse *p_data)
 {
-	int		i;
-	int		space;
+	int			i;
+	char		*temp_line;
 
-	space = count_spaces(line);
+	temp_line = ft_strdup(line);
 	line = remove_spaces(line);
 	if(*line == 'R')
 		p_data = get_resolution(line, p_data);		
 	else if (*line == 'N' || *line == 'S' || *line == 'W' || *line == 'E')
 		p_data = get_tex_path(line, p_data);
 	else if (ft_isdigit(*line))
-	{
-		parse_map(line, p_data, space);
-	}
+		p_data = parse_map(temp_line, p_data);
 	else
-	{
 		printf ("Unexpected error occured in check line while parsing \n\n");	
-	}
-	// print_parse_data(p_data);
+	free(temp_line);
 	return (p_data);
 }
 
@@ -49,6 +45,7 @@ t_parse		*parse_data_init(t_parse *p_data, int map_y_size)
 	p_data->res_y = 0;
 	p_data->map_x = 0;
 	p_data->map_y = map_y_size;
+	p_data->temp_counter = 0;	
 	return (p_data);
 }
 
@@ -75,5 +72,8 @@ void	parse(char **file, int map_y_size)
 	}
 	p_data = check_line (line, p_data);
 	free (line);
+	print_map(p_data);
+	// free(p_data->len_arr);
+	// free_map(p_data->map, p_data->len_arr);
 	free(p_data);
 }

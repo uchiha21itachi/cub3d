@@ -44,13 +44,15 @@ typedef struct s_parse {
 	char		*ea_path;
 	char		*s_path;
 	int			map_start;
+	int			temp_counter;
+	int			*len_arr;
 }				t_parse;
 
 //utils.c
 int		calculate_map_y_size(char *file);
 
 //parsing.c
-void	parse(char **file, int map_y_size);
+void		parse(char **file, int map_y_size);
 t_parse		*parse_data_init(t_parse *p_data, int map_y_size);
 t_parse		*check_line(char *line, t_parse *p_data);
 t_parse		*get_resolution(char *line, t_parse *p_data);
@@ -61,7 +63,7 @@ t_parse		*get_tex_path(char *line, t_parse *p_data);
 
 
 //parsing_map.c
-t_parse		*parse_map(char *line, t_parse *p_data, int spaces);
+t_parse		*parse_map(char *line, t_parse *p_data);
 
 //parser_utils.c
 int		ft_isspace(char c);
@@ -75,8 +77,12 @@ void	*ft_calloc(size_t count, size_t size);
 //parsing_errors.c
 void	parsing_error_messege(char c);
 void	print_parse_data(t_parse *p_data);
+void	print_map(t_parse *p_data);
+
+
 
 //ft_atoi.c
 int			ft_atoi(const char *str);
+
 
 #endif
