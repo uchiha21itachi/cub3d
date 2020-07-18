@@ -50,8 +50,6 @@ typedef struct s_parse {
 
 //utils.c
 int		calculate_map_y_size(char *file);
-
-//cub3d.c
 void	free_parse_data(t_parse  *p_data);
 
 //parsing.c
