@@ -26,3 +26,20 @@ http://projet-moteur-3d.e-monsite.com/pages/raycasting/raycasting.html
 #For MinilibX
 https://harm-smits.github.io/42docs/libs/minilibx/getting_started.html
 
+
+
+
+//notes
+
+9 represent empty spaces outside the map
+8 represent the initial spawn point
+0 represent the spaces within the walls
+1 represent the wall
+2 represent the sprites
+
+
+//todo
+add the S W E in the fill_map_array() 
+add function to get the direction vector
+add function to check the map (if properly enclosed)
+

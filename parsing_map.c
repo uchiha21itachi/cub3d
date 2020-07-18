@@ -1,15 +1,13 @@
 #include "cub3d.h"
 
-int			*init_len_arr(t_parse *p_data)
+t_parse			*init_len_arr(t_parse *p_data)
 {
-	int		*len_arr;
-
-	if (!(len_arr = (int *)malloc(sizeof(int) * p_data->map_y)))
+	if (!(p_data->len_arr = (int *)malloc(sizeof(int) * p_data->map_y)))
 	{
 		printf("error in malloc parsing the length array");
 		exit(0);
 	}
-	return(len_arr);
+	return(p_data);
 }
 
 t_parse		*fill_map_array(t_parse *p_data, char *line)
@@ -20,9 +18,16 @@ t_parse		*fill_map_array(t_parse *p_data, char *line)
 	while (counter < p_data->len_arr[p_data->temp_counter])
 	{
 		if (line[counter] == 32)
-			p_data->map[p_data->temp_counter][counter] = -1;
-		else
+			p_data->map[p_data->temp_counter][counter] = 9;
+		else if (line[counter] == 48 || line[counter] == 49 || line[counter] == 50)
 			p_data->map[p_data->temp_counter][counter] = line[counter] - 48;
+		else if (line[counter] == 78)
+			p_data->map[p_data->temp_counter][counter] = 8;
+		else
+		{
+			printf("invalid entry in map(fill_map_array) Exiting the program\n");
+			exit(5);
+		}
 		counter++;
 	}
 	return(p_data);
@@ -32,8 +37,8 @@ t_parse		*parse_map(char *line, t_parse *p_data)
 {
 	if (p_data->temp_counter == 0)
 	{	
-		p_data->len_arr = init_len_arr(p_data);
-		p_data->map = (int **)malloc(sizeof(int) * p_data->map_y);
+		p_data = init_len_arr(p_data);
+		p_data->map = (int **)malloc(sizeof(int *) * p_data->map_y);
 		if (p_data->map == NULL)
 			printf("error in malloc\n");
 	}

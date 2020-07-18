@@ -14,14 +14,21 @@ void	print_parse_data(t_parse *p_data)
 {
 	printf ("Resolution X - %d\n", p_data->res_x);
 	printf ("Resolution Y - %d\n", p_data->res_y);
-	printf ("Map size X - %d\n", p_data->map_x);
 	printf ("Map size Y - %d\n", p_data->map_y);
 
-	// int y = 0;
-	// int x =0;
-	// while (y < p_data->map_y)
-	// {
-	// }
+	int i = 0;
+	int j = 0;
+	while(i < p_data->temp_counter)
+	{
+		while (j < p_data->len_arr[i])
+		{
+			printf(" [i] [j] => [%d] [%d] = %d\n", i, j, p_data->map[i][j]);
+			j++;
+		}
+		j = 0;
+		i++;
+		printf("\n");
+	}
 
 	// printf ("path North = %s\n", p_data.no_path);
 	// printf ("path South = %s\n", p_data.so_path);
@@ -43,7 +50,10 @@ void	print_map(t_parse *p_data)
 	{
 		while (j < p_data->len_arr[i])
 		{
-			printf("%d", p_data->map[i][j]);
+			if (p_data->map[i][j] == 9)
+				printf("* ");
+			else
+				printf("%d ", p_data->map[i][j]);
 			j++;
 		}
 		printf ("\n");
