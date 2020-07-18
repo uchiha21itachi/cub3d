@@ -58,13 +58,15 @@ t_parse		*parse_data_init(t_parse *p_data, int map_y_size);
 t_parse		*check_line(char *line, t_parse *p_data);
 t_parse		*get_resolution(char *line, t_parse *p_data);
 
-
 //parsing_texture.c
 t_parse		*get_tex_path(char *line, t_parse *p_data);
 
 
 //parsing_map.c
 t_parse		*parse_map(char *line, t_parse *p_data);
+
+//parsing_map_check.c
+t_parse		*check_map(t_parse *p_data);
 
 //parser_utils.c
 int		ft_isspace(char c);

@@ -72,6 +72,6 @@ void	parse(char **file, int map_y_size)
 	free (line);
 	print_map(p_data);
 	// print_parse_data(p_data);
+	check_map(p_data);
 	free_parse_data(p_data);
-	// free(p_data);
 }

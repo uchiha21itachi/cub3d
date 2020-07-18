@@ -12,6 +12,7 @@ utils.c \
 parsing.c \
 parsing_texture.c \
 parsing_map.c \
+parsing_map_check.c \
 parsing_utils.c \
 parsing_errors.c \
 get_next_line.c \
