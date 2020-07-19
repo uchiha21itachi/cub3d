@@ -22,7 +22,11 @@ t_parse		*fill_map_array(t_parse *p_data, char *line)
 		else if (line[counter] == 48 || line[counter] == 49 || line[counter] == 50)
 			p_data->map[p_data->temp_counter][counter] = line[counter] - 48;
 		else if (line[counter] == 78)
+		{
 			p_data->map[p_data->temp_counter][counter] = 8;
+			p_data->temp_player->posX = counter;
+			p_data->temp_player->posY = p_data->temp_counter;
+		}
 		else
 		{
 			printf("invalid entry in map(fill_map_array) Exiting the program\n");

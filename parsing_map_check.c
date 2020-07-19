@@ -16,18 +16,31 @@ int			array_line_spaces(int *arr, int length)
 	return (counter);
 }
 
+int			check_flush_condition(int x, int y, t_parse *p_data)
+{
+	if ( x > p_data->len_arr[y])
+		return (0);
+	if (y > p_data->map_y)
+		return (0);
+	return (1);
+}
+
+void		flush_map(int x, int y, t_parse	*p_data)
+{
+	if (check_flush_condition(x, y, p_data))
+	{
+		printf ("x - [%d] y - [%d]\n",x, y);
+		flush_map(x+1, y, p_data);
+		flush_map(x-1, y, p_data);
+		flush_map(x, y+1, p_data);
+		flush_map(x, y-1, p_data);
+	}
+}
+
 t_parse		*check_map(t_parse *p_data)
 {
-	int i;
 
-	i = 0;
-
-	while (i < p_data->map_y)
-	{
-		printf("line number - %d\n", i);
-		printf("  line - %d\n", p_data->len_arr[i]);
-		printf("spaces - %d\n",array_line_spaces(p_data->map[i], p_data->len_arr[i]));
-		i++;
-	}
+	// print_map(p_data);
+	flush_map(p_data->temp_player->posX, p_data->temp_player->posY, p_data);
 	return(p_data);
 }

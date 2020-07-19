@@ -44,6 +44,8 @@ t_parse		*parse_data_init(t_parse *p_data, int map_y_size)
 	p_data->map_x = 0;
 	p_data->map_y = map_y_size;
 	p_data->temp_counter = 0;
+	p_data->temp_player->posX = 0;
+	p_data->temp_player->posY = 0;
 	return (p_data);
 }
 
@@ -61,6 +63,7 @@ void	parse(char **file, int map_y_size)
 		exit (0);
 	}
 	p_data = ft_calloc(sizeof(t_parse), 1);
+	p_data->temp_player = (t_player *)malloc(sizeof(t_player *));
 	p_data = parse_data_init(p_data, map_y_size);
 	printf ("fd is = %d\n", fd);
 	while ((ret = get_next_line(fd, &line) > 0))
@@ -70,8 +73,9 @@ void	parse(char **file, int map_y_size)
 	}
 	p_data = check_line (line, p_data);
 	free (line);
-	print_map(p_data);
+	// print_map(p_data);
 	// print_parse_data(p_data);
 	check_map(p_data);
 	free_parse_data(p_data);
+	free(p_data->temp_player);
 }

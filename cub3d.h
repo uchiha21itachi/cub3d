@@ -32,6 +32,12 @@ typedef struct s_mlx {
 	t_img	img;
 }				t_mlx;
 
+typedef	struct s_player {
+	int	posX;
+	int	posY;
+}				t_player;
+
+
 typedef struct s_parse {
 	int			res_x;
 	int			res_y;
@@ -46,6 +52,7 @@ typedef struct s_parse {
 	int			map_start;
 	int			temp_counter;
 	int			*len_arr;
+	t_player	*temp_player;
 }				t_parse;
 
 //utils.c
