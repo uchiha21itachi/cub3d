@@ -14,7 +14,7 @@
 
 int		check_error(int fd, char **str, char **line)
 {
-	if (fd < 0 || fd > OPEN_MAX || line == NULL
+	if (fd < 0 || fd > FOPEN_MAX || line == NULL
 	|| BUFFER_SIZE < 1 || read(fd, *str, 0))
 	{
 		return (-1);
