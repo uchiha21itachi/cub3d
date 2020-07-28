@@ -19,7 +19,6 @@
 int			check_down(int x, int y, t_parse *p_data)
 {
 	int ret;
-	int line_one[p_data->len_arr[0]];
 
 	ret = -1;
 	if (x <= p_data->map_y && y <= p_data->len_arr[x])
@@ -32,13 +31,11 @@ int			check_down(int x, int y, t_parse *p_data)
 		if (p_data->map[x][y] == 1)
 		{
 			printf("found One at x [%d] y [%d]\n",x, y);
-			line_one[y] = 1;
 			ret = 1;
 		}
 		else if (p_data->map[x][y] == 0)
 		{
 			printf("found Zero at x [%d] y [%d]\n",x, y);
-			line_one[y] = 0;
 			ret = 0;
 		}
 		else if (p_data->map[x][y] == 9)
