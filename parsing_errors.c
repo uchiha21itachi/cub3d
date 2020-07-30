@@ -61,3 +61,23 @@ void	print_map(t_parse *p_data)
 		i++;
 	}
 }
+void	print_temp_map(t_parse *p_data)
+{
+	int i;
+	int j;
+
+	i = 0;
+	j = 0;
+	
+	while (i < p_data->map_y)
+	{
+		while (j < p_data->len_arr[i])
+		{
+			printf("%d ", p_data->temp_map[i][j]);
+			j++;
+		}
+		printf ("\n");
+		j = 0;
+		i++;
+	}
+}

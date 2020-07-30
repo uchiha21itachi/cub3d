@@ -24,8 +24,8 @@ t_parse		*fill_map_array(t_parse *p_data, char *line)
 		else if (line[counter] == 78)
 		{
 			p_data->map[p_data->temp_counter][counter] = 8;
-			p_data->temp_player->posX = counter;
-			p_data->temp_player->posY = p_data->temp_counter;
+			p_data->temp_player->posY = counter;
+			p_data->temp_player->posX = p_data->temp_counter;
 		}
 		else
 		{

@@ -42,6 +42,7 @@ typedef struct s_parse {
 	int			res_x;
 	int			res_y;
 	int			**map;
+	int			**temp_map;
 	int			map_x;
 	int			map_y;
 	char		*no_path;
@@ -88,6 +89,8 @@ void	*ft_calloc(size_t count, size_t size);
 void	parsing_error_messege(char c);
 void	print_parse_data(t_parse *p_data);
 void	print_map(t_parse *p_data);
+void	print_temp_map(t_parse *p_data);
+
 
 
 
