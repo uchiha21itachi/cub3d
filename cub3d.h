@@ -53,6 +53,7 @@ typedef struct s_parse {
 	int			map_start;
 	int			temp_counter;
 	int			*len_arr;
+	int			map_check_ret;
 	t_player	*temp_player;
 }				t_parse;
 

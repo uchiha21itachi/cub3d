@@ -40,56 +40,161 @@ t_parse		*get_temp_map(t_parse *p_data)
 	return (p_data);
 }
 
-void		flood_fill(int x, int y, t_parse *p_data)
+
+int		check_right(int x, int y, t_parse *p_data)
 {
-	//up and down working but not for the corners
-	//right working but not for spaces in start or end
+	if (y+1 < p_data->len_arr[x])
+	{
+		if (p_data->map[x][y+1] == 9)
+			return (0);
+	}
+	else
+		return (0);
+	return (1);
+}
+
+
+int		check_left(int x, int y, t_parse *p_data)
+{
+	if (y-1 >= 0)
+	{
+		if (p_data->map[x][y-1] == 9)
+			return (0);
+	}
+	else
+		return (0);
+	return (1);
+}
+
+int		check_down(int x, int y, t_parse *p_data)
+{
+	if (x+1 < p_data->map_y && y < p_data->len_arr[x+1])
+	{
+		if (p_data->map[x+1][y] == 9)
+			return (0);
+	}
+	else
+		return (0);
+	return (1);
+}
+
+int		check_up(int x, int y, t_parse *p_data)
+{
+	if (x-1 >= 0 && y < p_data->len_arr[x-1])
+	{
+		if (p_data->map[x-1][y] == 9)
+			return (0);
+	}
+	else
+		return (0);
+	return (1);
+}
+
+
+int		check_diagonal_up1(int x, int y, t_parse *p_data)
+{
+	if (x-1 >= 0 && y-1 >= 0 && y-1 < p_data->len_arr[x-1])
+	{
+		if (p_data->map[x-1][y] == 9)
+			return (0);
+	}
+	else
+		return (0);
+}
+
+int		check_diagonal_up2(int x, int y, t_parse *p_data)
+{
+	if (x-1 >= 0  && y+1 < p_data->len_arr[x-1])
+	{
+		if (p_data->map[x-1][y] == 9)
+			return (0);		
+	}
+	else
+		return (0);
+	return (1);
+}
+
+int		check_diagonal_down1(int x, int y, t_parse *p_data)
+{
+	if (x+1 >= p_data->map_y  && y+1 < p_data->len_arr[x+1])
+	{
+		if (p_data->map[x-1][y] == 9)
+			return (0);		
+	}
+	else
+		return (0);
+	return (1);
+}
+
+int		check_diagonal_down2(int x, int y, t_parse *p_data)
+{
+	if (x+1 >= p_data->map_y  && y-1 >= 0)
+	{
+		if (p_data->map[x-1][y] == 9)
+			return (0);		
+	}
+	else
+		return (0);
+	return (1);
+}
+
+t_parse			*check_position(int x, int y, t_parse *p_data)
+{
+	int i;
+
+	i = 1;
+	if (p_data->map[x][y] == 0)
+	{
+		if ((i = check_up(x, y, p_data)) == 0)
+		{
+			p_data->map_check_ret = 0;
+			return (p_data);
+		}
+		if ((i = check_down(x, y, p_data)) == 0)
+		{
+			p_data->map_check_ret = 0;
+			return (p_data);
+		}
+		if ((i = check_left(x, y, p_data)) == 0)
+		{
+			p_data->map_check_ret = 0;
+			return (p_data);
+		}
+		if ((i = check_right(x, y, p_data)) == 0)
+		{
+			p_data->map_check_ret = 0;
+			return (p_data);
+		}
+		if ((i = check_diagonal_up1(x, y, p_data)) == 0)
+		{
+			p_data->map_check_ret = 0;
+			return (p_data);
+		}if ((i = check_diagonal_up2(x, y, p_data)) == 0)
+		{
+			p_data->map_check_ret = 0;
+			return (p_data);
+		}if ((i = check_diagonal_down1(x, y, p_data)) == 0)
+		{
+			p_data->map_check_ret = 0;
+			return (p_data);
+		}if ((i = check_diagonal_down2(x, y, p_data)) == 0)
+		{
+			p_data->map_check_ret = 0;
+			return (p_data);
+		}
+		// check_diagnol();
+	}
+	return (p_data);
+}
+
+
+t_parse		*flood_fill(int x, int y, t_parse *p_data)
+{
 	if (x >= 0 && x < p_data->map_y && y >= 0 && y < p_data->len_arr[x])
 	{
-	
-		if (p_data->map[x][y] == 0)
+		if (p_data->temp_map[x][y] == 0)
 		{
-			//upper
-			if (x - 1 >= 0 && y <= p_data->len_arr[x - 1] - 1)
-			{
-				if (p_data->map[x-1][y] == 9)
-				{
-					printf ("wrong map (up1)\n");
-					printf ("x - [%d] y - [%d] len - [%d]\n", x, y, p_data->len_arr[x-1]);
-				}
-			}
-			else
-			{
-				printf ("wrong map (up2)\n");
-				printf ("x - [%d] y - [%d] len - [%d]\n", x, y, p_data->len_arr[x-1]);
-			}
-
-			//down
-			if (x+1 < p_data->map_y && y <= p_data->len_arr[x+1] - 1)
-			{
-				if (p_data->map[x+1][y] == 9)
-				{
-					printf ("wrong map (down1)\n");
-					printf ("x - [%d] y - [%d] len - [%d]\n", x, y, p_data->len_arr[x-1]);
-				}
-			}
-			else
-			{
-				printf ("wrong map (down2)\n");
-				printf ("x - [%d] y - [%d] len - [%d]\n", x, y, p_data->len_arr[x+1]);
-			}
-
-			//right
-			if (p_data->map[x][0] != 1 || p_data->map[x][p_data->len_arr[x] - 1] != 1)
-			{
-				printf ("wrong map (left right2)\n");
-				printf ("x - [%d] y - [%d] len - [%d]\n", x, y, p_data->len_arr[x+1]);
-			}
-
-		}
-		// && p_data->map[x][y] != 1
-		if (p_data->temp_map[x][y] == 0 )
-		{
+			p_data = check_position(x, y, p_data);
 			p_data->temp_map[x][y] = 1;
 			flood_fill(x+1, y, p_data);
 			flood_fill(x-1, y, p_data);
@@ -97,19 +202,19 @@ void		flood_fill(int x, int y, t_parse *p_data)
 			flood_fill(x, y-1, p_data);
 		}
 	}
+	return (p_data);
 }
 
 t_parse		*check_map(t_parse *p_data)
 {
-
 	print_map(p_data);
 	printf ("\n\n");
 	p_data = get_temp_map(p_data);
-	// print_temp_map(p_data);
 	printf ("\n\n");
-	printf ("\n\n");
-	flood_fill(p_data->temp_player->posX, p_data->temp_player->posY, p_data);
-	print_temp_map(p_data);
+	p_data = flood_fill(p_data->temp_player->posX, p_data->temp_player->posY, p_data);
+	if (p_data->map_check_ret == 0)
+		printf("ERRORR WRONG MAP\n\n");
+	print_temp_map(p_data);	
 	
 	return(p_data);
 }

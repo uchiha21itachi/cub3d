@@ -42,6 +42,7 @@ t_parse		*parse_data_init(t_parse *p_data, int map_y_size)
 	p_data->res_x = 0;
 	p_data->res_y = 0;
 	p_data->map_x = 0;
+	p_data->map_check_ret = 1;
 	p_data->map_y = map_y_size;
 	p_data->temp_counter = 0;
 	p_data->temp_player->posX = 0;
@@ -63,9 +64,11 @@ void	parse(char **file, int map_y_size)
 		exit (0);
 	}
 	p_data = ft_calloc(sizeof(t_parse), 1);
+	//might need to change from calloc to malloc
+
 	p_data->temp_player = (t_player *)malloc(sizeof(t_player *));
 	p_data = parse_data_init(p_data, map_y_size);
-	printf ("fd is = %d\n", fd);
+	// printf ("fd is = %d\n", fd);
 	while ((ret = get_next_line(fd, &line) > 0))
 	{
 		p_data = check_line (line, p_data);
