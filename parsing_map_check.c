@@ -91,22 +91,23 @@ int		check_up(int x, int y, t_parse *p_data)
 }
 
 
-int		check_diagonal_up1(int x, int y, t_parse *p_data)
+int		check_diagonal_upl(int x, int y, t_parse *p_data)
 {
 	if (x-1 >= 0 && y-1 >= 0 && y-1 < p_data->len_arr[x-1])
 	{
-		if (p_data->map[x-1][y] == 9)
+		if (p_data->map[x-1][y-1] == 9)
 			return (0);
 	}
 	else
 		return (0);
+	return (1);
 }
 
-int		check_diagonal_up2(int x, int y, t_parse *p_data)
+int		check_diagonal_upr(int x, int y, t_parse *p_data)
 {
 	if (x-1 >= 0  && y+1 < p_data->len_arr[x-1])
 	{
-		if (p_data->map[x-1][y] == 9)
+		if (p_data->map[x-1][y+1] == 9)
 			return (0);		
 	}
 	else
@@ -114,11 +115,11 @@ int		check_diagonal_up2(int x, int y, t_parse *p_data)
 	return (1);
 }
 
-int		check_diagonal_down1(int x, int y, t_parse *p_data)
+int		check_diagonal_downr(int x, int y, t_parse *p_data)
 {
-	if (x+1 >= p_data->map_y  && y+1 < p_data->len_arr[x+1])
+	if (x+1 < p_data->map_y  && y+1 < p_data->len_arr[x+1])
 	{
-		if (p_data->map[x-1][y] == 9)
+		if (p_data->map[x+1][y+1] == 9)
 			return (0);		
 	}
 	else
@@ -126,11 +127,11 @@ int		check_diagonal_down1(int x, int y, t_parse *p_data)
 	return (1);
 }
 
-int		check_diagonal_down2(int x, int y, t_parse *p_data)
+int		check_diagonal_downl(int x, int y, t_parse *p_data)
 {
-	if (x+1 >= p_data->map_y  && y-1 >= 0)
+	if (x+1 < p_data->map_y  && y-1 >= 0 && y-1 < p_data->len_arr[x+1])
 	{
-		if (p_data->map[x-1][y] == 9)
+		if (p_data->map[x+1][y-1] == 9)
 			return (0);		
 	}
 	else
@@ -147,42 +148,52 @@ t_parse			*check_position(int x, int y, t_parse *p_data)
 	{
 		if ((i = check_up(x, y, p_data)) == 0)
 		{
+			printf("inside the check function check up - x y [%d] [%d]\n",x ,y);
 			p_data->map_check_ret = 0;
 			return (p_data);
 		}
 		if ((i = check_down(x, y, p_data)) == 0)
 		{
+			printf("inside the check function check down x y [%d] [%d]\n",x ,y);
 			p_data->map_check_ret = 0;
 			return (p_data);
 		}
 		if ((i = check_left(x, y, p_data)) == 0)
 		{
+			printf("inside the check function check left x y [%d] [%d]\n",x ,y);
 			p_data->map_check_ret = 0;
-			return (p_data);
+		 	return (p_data);
 		}
 		if ((i = check_right(x, y, p_data)) == 0)
 		{
+			printf("inside the check function check right x y [%d] [%d]\n",x ,y);
 			p_data->map_check_ret = 0;
 			return (p_data);
 		}
-		if ((i = check_diagonal_up1(x, y, p_data)) == 0)
+		if ((i = check_diagonal_upl(x, y, p_data)) == 0)
 		{
-			p_data->map_check_ret = 0;
-			return (p_data);
-		}if ((i = check_diagonal_up2(x, y, p_data)) == 0)
-		{
-			p_data->map_check_ret = 0;
-			return (p_data);
-		}if ((i = check_diagonal_down1(x, y, p_data)) == 0)
-		{
-			p_data->map_check_ret = 0;
-			return (p_data);
-		}if ((i = check_diagonal_down2(x, y, p_data)) == 0)
-		{
+			printf("inside the check function diag up left x y [%d] [%d]\n",x ,y);
 			p_data->map_check_ret = 0;
 			return (p_data);
 		}
-		// check_diagnol();
+		if ((i = check_diagonal_upr(x, y, p_data)) == 0)
+		{
+			printf("inside the check function diag up right x y [%d] [%d]\n",x ,y);
+			p_data->map_check_ret = 0;
+			return (p_data);
+		}
+		if ((i = check_diagonal_downr(x, y, p_data)) == 0)
+		{
+			printf("inside the check function diag down right x y [%d] [%d]\n",x ,y);
+			p_data->map_check_ret = 0;
+			return (p_data);
+		}
+		if ((i = check_diagonal_downl(x, y, p_data)) == 0)
+		{
+			printf("inside the check function diag down left x y [%d] [%d]\n",x ,y);
+			p_data->map_check_ret = 0;
+			return (p_data);
+		}
 	}
 	return (p_data);
 }
@@ -212,6 +223,7 @@ t_parse		*check_map(t_parse *p_data)
 	p_data = get_temp_map(p_data);
 	printf ("\n\n");
 	p_data = flood_fill(p_data->temp_player->posX, p_data->temp_player->posY, p_data);
+	printf("map check ret after flood fill %d\n", p_data->map_check_ret);
 	if (p_data->map_check_ret == 0)
 		printf("ERRORR WRONG MAP\n\n");
 	print_temp_map(p_data);	
