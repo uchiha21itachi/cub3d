@@ -3,10 +3,10 @@ CC = gcc
 FLAGS = -Wall -Wextra -Werror
 
 # mac compile
-# MLXLIB = -L /usr/local/lib -lmlx -framework OpenGL -framework AppKit
+MLXLIB = -L /usr/local/lib -lmlx -framework OpenGL -framework AppKit
 
 # linux compile
-MLXLIB = -L /usr/local/lib -lmlx -lXext -lX11 -lm -lbsd
+# MLXLIB = -L /usr/local/lib -lmlx -lXext -lX11 -lm -lbsd
 
 NAME = cub3D
 
@@ -19,6 +19,7 @@ parsing_map.c \
 parsing_map_check.c \
 parsing_utils.c \
 parsing_errors.c \
+create_game.c \
 get_next_line.c \
 get_next_line_utils.c \
 ft_atoi.c \

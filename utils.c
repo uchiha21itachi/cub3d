@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-int		get_map_size(char *line)
+int		check_ismap(char *line)
 {
 	line = remove_spaces(line);
 	if (ft_isdigit(*line))
@@ -9,6 +9,7 @@ int		get_map_size(char *line)
 		return(0);
 }
 
+//This should actually be map x size
 int		calculate_map_y_size(char *file)
 {
 	//calculating the size of the map before starting the parsing
@@ -28,11 +29,11 @@ int		calculate_map_y_size(char *file)
 	}
 	while ((ret = get_next_line(fd, &line)) > 0)
 	{
-		if ((map_start_counter = get_map_size(line)) == 1)
+		if ((map_start_counter = check_ismap(line)) == 1)
 			map_y_size++;
 		free(line);
 	}
-	if ((map_start_counter = get_map_size(line)) == 1)
+	if ((map_start_counter = check_ismap(line)) == 1)
 		map_y_size++;
 	free(line);
 	if (close(fd) < 0)
@@ -41,7 +42,7 @@ int		calculate_map_y_size(char *file)
 }
 
 
-void	free_parse_data(t_parse  *p_data)
+void	free_map(t_parse  *p_data)
 {
 	int i;
 	int *temp;
@@ -57,5 +58,21 @@ void	free_parse_data(t_parse  *p_data)
 	temp = p_data->len_arr;
 	free(temp);
 	free(p_data);
+}
+
+
+void	free_temp_map(t_parse  *p_data)
+{
+	int i;
+	int *temp;
+
+	i = 0;
+	while (i < p_data->map_y)
+	{
+		temp = p_data->temp_map[i];
+		free(temp);
+		i++;
+	}	
+	free(p_data->temp_map);
 }
 

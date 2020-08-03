@@ -3,10 +3,11 @@
 
 void	parsing_error_messege(char c)
 {
-	if (c == 'i')
-	{
-		printf ("Error - Invalid entry in map file \n");
-	}	
+	if (c == 'r')
+		printf ("Error - Invalid entry in map file in resolution \n");
+	else if (c == 'm')
+			printf("Error - Invalid entry in map file in map(fill_map_array)\n");
+
 }
 
 
@@ -16,25 +17,14 @@ void	print_parse_data(t_parse *p_data)
 	printf ("Resolution Y - %d\n", p_data->res_y);
 	printf ("Map size Y - %d\n", p_data->map_y);
 
-	int i = 0;
-	int j = 0;
-	while(i < p_data->temp_counter)
-	{
-		while (j < p_data->len_arr[i])
-		{
-			printf(" [i] [j] => [%d] [%d] = %d\n", i, j, p_data->map[i][j]);
-			j++;
-		}
-		j = 0;
-		i++;
-		printf("\n");
-	}
-
 	// printf ("path North = %s\n", p_data.no_path);
 	// printf ("path South = %s\n", p_data.so_path);
 	// printf ("path West = %s\n", p_data.we_path);
 	// printf ("path East = %s\n", p_data.ea_path);
 	// printf ("path Sprite = %s\n", p_data.s_path);
+
+	print_map(p_data);
+
 }
 
 

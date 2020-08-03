@@ -21,7 +21,7 @@ t_parse		*fill_map_array(t_parse *p_data, char *line)
 			p_data->map[p_data->temp_counter][counter] = 9;
 		else if (line[counter] == 48 || line[counter] == 49 || line[counter] == 50)
 			p_data->map[p_data->temp_counter][counter] = line[counter] - 48;
-		else if (line[counter] == 78)
+		else if (line[counter] == 78 || line[counter] == 69 || line[counter] == 83 || line[counter] == 87)
 		{
 			p_data->map[p_data->temp_counter][counter] = 8;
 			p_data->temp_player->posY = counter;
@@ -29,7 +29,7 @@ t_parse		*fill_map_array(t_parse *p_data, char *line)
 		}
 		else
 		{
-			printf("invalid entry in map(fill_map_array) Exiting the program\n");
+			parsing_error_messege('m');
 			exit(5);
 		}
 		counter++;

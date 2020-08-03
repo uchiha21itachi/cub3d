@@ -59,7 +59,9 @@ typedef struct s_parse {
 
 //utils.c
 int		calculate_map_y_size(char *file);
-void	free_parse_data(t_parse  *p_data);
+void	free_map(t_parse  *p_data);
+void	free_temp_map(t_parse  *p_data);
+
 
 //parsing.c
 void		parse(char **file, int map_y_size);
@@ -80,6 +82,7 @@ t_parse		*check_map(t_parse *p_data);
 //parser_utils.c
 int		ft_isspace(char c);
 int		ft_isdigit(int c);
+int		check_r_line(char *line);
 int		count_spaces(char *line);
 char	*remove_spaces(char *line);
 char	*remove_digits(char *line);
@@ -93,6 +96,8 @@ void	print_map(t_parse *p_data);
 void	print_temp_map(t_parse *p_data);
 
 
+//create_game.c
+void		create_game(t_parse *p_data);
 
 
 //ft_atoi.c

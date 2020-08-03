@@ -2,6 +2,8 @@
 
 t_parse		*get_resolution(char *line, t_parse *p_data)
 {
+	if (check_r_line(line) == 0)
+		parsing_error_messege('r');
 	while (*line && (p_data->res_y == 0 || p_data->res_x == 0))
 	{
 		line = remove_spaces(line);
@@ -11,9 +13,7 @@ t_parse		*get_resolution(char *line, t_parse *p_data)
 		line++;
 	}
 	if (p_data->res_x == 0 || p_data->res_y == 0)
-		parsing_error_messege('i');
-	// printf ("Resolution X - %d\n", p_data->res_x);
-	// printf ("Resolution Y - %d\n", p_data->res_y);
+		parsing_error_messege('r');
 	return (p_data);
 }
 
@@ -68,7 +68,7 @@ void	parse(char **file, int map_y_size)
 
 	p_data->temp_player = (t_player *)malloc(sizeof(t_player *));
 	p_data = parse_data_init(p_data, map_y_size);
-	// printf ("fd is = %d\n", fd);
+	printf ("fd is = %d\n", fd);
 	while ((ret = get_next_line(fd, &line) > 0))
 	{
 		p_data = check_line (line, p_data);
@@ -76,9 +76,9 @@ void	parse(char **file, int map_y_size)
 	}
 	p_data = check_line (line, p_data);
 	free (line);
-	// print_map(p_data);
 	// print_parse_data(p_data);
-	check_map(p_data);
-	free_parse_data(p_data);
+	p_data = check_map(p_data);
+	create_game(p_data);
+	free_map(p_data);
 	free(p_data->temp_player);
 }

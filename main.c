@@ -16,7 +16,6 @@
  {
 	int		map_y_size;
 
-	printf ("Number of arguments - %d\n", argc);
 	if (argc < 2 || argc > 3)
 		printf ("Wrong Number of arguments\n");
 	else
