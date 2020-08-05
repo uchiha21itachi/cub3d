@@ -23,13 +23,22 @@ t_parse		*fill_map_array(t_parse *p_data, char *line)
 			p_data->map[p_data->temp_counter][counter] = line[counter] - 48;
 		else if (line[counter] == 78 || line[counter] == 69 || line[counter] == 83 || line[counter] == 87)
 		{
-			p_data->map[p_data->temp_counter][counter] = 8;
-			p_data->temp_player->posY = counter;
-			p_data->temp_player->posX = p_data->temp_counter;
+			if (p_data->temp_player->posX == -1 && p_data->temp_player->posY == -1)
+			{
+				p_data->map[p_data->temp_counter][counter] = 8;
+				p_data->temp_player->posY = counter;
+				p_data->temp_player->posX = p_data->temp_counter;
+			}
+			else
+			{
+				parsing_error_messege('p');
+				p_data->map_error = 1;
+			}
 		}
 		else
 		{
 			parsing_error_messege('m');
+			p_data->map_error = 1;
 			exit(5);
 		}
 		counter++;

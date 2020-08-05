@@ -13,7 +13,10 @@ t_parse		*get_resolution(char *line, t_parse *p_data)
 		line++;
 	}
 	if (p_data->res_x == 0 || p_data->res_y == 0)
-		parsing_error_messege('r');
+	{
+		p_data->map_error = 1;
+		parsing_error_messege('r');		
+	}
 	return (p_data);
 }
 
@@ -43,10 +46,11 @@ t_parse		*parse_data_init(t_parse *p_data, int map_y_size)
 	p_data->res_y = 0;
 	p_data->map_x = 0;
 	p_data->map_check_ret = 1;
+	p_data->map_error = 0;
 	p_data->map_y = map_y_size;
 	p_data->temp_counter = 0;
-	p_data->temp_player->posX = 0;
-	p_data->temp_player->posY = 0;
+	p_data->temp_player->posX = -1;
+	p_data->temp_player->posY = -1;
 	return (p_data);
 }
 

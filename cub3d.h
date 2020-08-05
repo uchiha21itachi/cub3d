@@ -16,6 +16,7 @@
 # include "minilibx/mlx.h"
 # include <stdio.h>
 # include <stdlib.h>
+# include <math.h>
 #include "get_next_line.h"
 
 typedef	struct	s_img {
@@ -33,9 +34,40 @@ typedef struct s_mlx {
 }				t_mlx;
 
 typedef	struct s_player {
-	int	posX;
-	int	posY;
+	double	posX;
+	double	posY;
 }				t_player;
+
+typedef	struct s_game
+{
+	t_player	*player;
+	double		dirX;
+	double		dirY;
+	double		planeX;
+	double		planeY;
+	double		time;
+	double		old_time;
+	int			mapX;
+	int			mapY;
+	double		cameraX;
+	double		rayDirX;
+	double		rayDirY;
+	double		sideDistX;
+	double		sideDistY;
+	double		deltaDistX;
+	double		deltaDistY;
+	int			stepX;
+	int			stepY;
+	int			side;
+	double		perWallDist;
+}				t_game;
+
+typedef	struct s_draw
+{
+	int			lineHeight;
+	int			drawStart;
+	int			drawEnd;
+}				t_draw;
 
 
 typedef struct s_parse {
@@ -54,6 +86,7 @@ typedef struct s_parse {
 	int			temp_counter;
 	int			*len_arr;
 	int			map_check_ret;
+	int			map_error;
 	t_player	*temp_player;
 }				t_parse;
 
@@ -98,6 +131,9 @@ void	print_temp_map(t_parse *p_data);
 
 //create_game.c
 void		create_game(t_parse *p_data);
+
+//game.c
+void	game(t_parse  *p_data);
 
 
 //ft_atoi.c

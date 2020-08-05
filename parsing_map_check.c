@@ -170,30 +170,30 @@ t_parse			*check_position(int x, int y, t_parse *p_data)
 			p_data->map_check_ret = 0;
 			return (p_data);
 		}
-		if ((i = check_diagonal_upl(x, y, p_data)) == 0)
-		{
-			printf("inside the check function diag up left x y [%d] [%d]\n",x ,y);
-			p_data->map_check_ret = 0;
-			return (p_data);
-		}
-		if ((i = check_diagonal_upr(x, y, p_data)) == 0)
-		{
-			printf("inside the check function diag up right x y [%d] [%d]\n",x ,y);
-			p_data->map_check_ret = 0;
-			return (p_data);
-		}
-		if ((i = check_diagonal_downr(x, y, p_data)) == 0)
-		{
-			printf("inside the check function diag down right x y [%d] [%d]\n",x ,y);
-			p_data->map_check_ret = 0;
-			return (p_data);
-		}
-		if ((i = check_diagonal_downl(x, y, p_data)) == 0)
-		{
-			printf("inside the check function diag down left x y [%d] [%d]\n",x ,y);
-			p_data->map_check_ret = 0;
-			return (p_data);
-		}
+		// if ((i = check_diagonal_upl(x, y, p_data)) == 0)
+		// {
+		// 	printf("inside the check function diag up left x y [%d] [%d]\n",x ,y);
+		// 	p_data->map_check_ret = 0;
+		// 	return (p_data);
+		// }
+		// if ((i = check_diagonal_upr(x, y, p_data)) == 0)
+		// {
+		// 	printf("inside the check function diag up right x y [%d] [%d]\n",x ,y);
+		// 	p_data->map_check_ret = 0;
+		// 	return (p_data);
+		// }
+		// if ((i = check_diagonal_downr(x, y, p_data)) == 0)
+		// {
+		// 	printf("inside the check function diag down right x y [%d] [%d]\n",x ,y);
+		// 	p_data->map_check_ret = 0;
+		// 	return (p_data);
+		// }
+		// if ((i = check_diagonal_downl(x, y, p_data)) == 0)
+		// {
+		// 	printf("inside the check function diag down left x y [%d] [%d]\n",x ,y);
+		// 	p_data->map_check_ret = 0;
+		// 	return (p_data);
+		// }
 	}
 	return (p_data);
 }
@@ -220,7 +220,7 @@ t_parse		*check_map(t_parse *p_data)
 {
 	print_map(p_data);
 	p_data = get_temp_map(p_data);
-	printf("player starting position id [%d] [%d]\n", p_data->temp_player->posX, p_data->temp_player->posY);
+	printf("player starting position id [%f] [%f]\n", p_data->temp_player->posX, p_data->temp_player->posY);
 	p_data = flood_fill(p_data->temp_player->posX, p_data->temp_player->posY, p_data);
 	if (p_data->map_check_ret == 0)
 		printf("ERRORR WRONG MAP\n\n");

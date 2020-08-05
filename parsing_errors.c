@@ -6,8 +6,9 @@ void	parsing_error_messege(char c)
 	if (c == 'r')
 		printf ("Error - Invalid entry in map file in resolution \n");
 	else if (c == 'm')
-			printf("Error - Invalid entry in map file in map(fill_map_array)\n");
-
+		printf("Error - Invalid entry in map file in map(fill_map_array)\n");
+	else if (c == 'p')
+		printf("Error - Player position is twice in map\n");
 }
 
 
