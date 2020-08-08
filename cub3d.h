@@ -40,7 +40,8 @@ typedef	struct s_player {
 
 typedef	struct s_game
 {
-	t_player	*player;
+	double		posX;
+	double		posY;
 	double		dirX;
 	double		dirY;
 	double		planeX;
@@ -60,6 +61,8 @@ typedef	struct s_game
 	int			stepY;
 	int			side;
 	double		perWallDist;
+	double		moveSpeed;
+	double		rotSpeed;
 }				t_game;
 
 typedef	struct s_draw
@@ -69,6 +72,17 @@ typedef	struct s_draw
 	int			drawEnd;
 }				t_draw;
 
+typedef	struct	s_keys
+{
+	int			k_up;
+	int			k_down;
+	int			k_left;
+	int			k_right;
+	int			k_a;
+	int			k_s;
+	int			k_d;
+	int			k_w;
+}				t_keys;
 
 typedef struct s_parse {
 	int			res_x;
@@ -131,9 +145,11 @@ void	print_temp_map(t_parse *p_data);
 
 //create_game.c
 void		create_game(t_parse *p_data);
+void		verLine(int x, t_draw *draw, t_mlx mlx, t_img img, int color);
+
 
 //game.c
-void	game(t_parse  *p_data);
+void	game(t_parse  *p_data, t_mlx mlx, t_img img);
 
 
 //ft_atoi.c

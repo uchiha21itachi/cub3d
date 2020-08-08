@@ -20,7 +20,7 @@ parsing_map_check.c \
 parsing_utils.c \
 parsing_errors.c \
 create_game.c \
-game.c \
+raycast_test.c \
 get_next_line.c \
 get_next_line_utils.c \
 ft_atoi.c \

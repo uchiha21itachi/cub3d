@@ -17,16 +17,16 @@ t_game	*game_data_init(t_parse  *p_data, t_game *game)
 {
 	if (!(game->player = (t_player *)malloc(sizeof (t_player) * 1)))
 		printf("error in parsing player in game.c\n");
-	game->player->posX = p_data->temp_player->posX;
-	game->player->posY = p_data->temp_player->posY;
-	game->dirX = -1;
-	game->dirY = 0;
+	game->player->posX = p_data->temp_player->posX;//
+	game->player->posY = p_data->temp_player->posY;//
+	game->dirX = -1;//
+	game->dirY = 0;//
 	game->planeX = 0;
 	game->planeY = 0.66;
 	game->time = 0;
 	game->old_time = 0;
-	game->mapX = -1;
-	game->mapY = -1;
+	game->mapX = -1;//
+	game->mapY = -1;//
 	game->cameraX = 0;
 	game->rayDirX = 0;
 	game->rayDirY = 0;
