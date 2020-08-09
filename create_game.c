@@ -35,10 +35,19 @@ void		verLine(int x, t_draw *draw, t_mlx mlx, t_img img, int color)
 	mlx_put_image_to_window(mlx.mlx, mlx.mlx_win, img.img, 0, 0);
 }
 
+int			close_window(int keycode, t_mlx *mlx)
+{		
+		if(keycode == 53)
+			mlx_destroy_window(mlx->mlx, mlx->mlx_win);
+		return (keycode);
+}
+
 void		create_game(t_parse *p_data)
 {
 	t_mlx	mlx;
 	t_img	img;
+	
+	int		temp;
 
 	if ((mlx.mlx = mlx_init()) == NULL)
 		printf("error in initializing the mlx init\n");
@@ -47,6 +56,11 @@ void		create_game(t_parse *p_data)
 		printf("error in creating a new image\n");
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
 	game(p_data, mlx, img);
+	read_keys();
+	// temp = mlx_key_hook(mlx.mlx_win, close_window, &mlx);
+	// printf("keycode - %d\n", temp);
+	
+	mlx_hook(mlx.mlx_win, 2, 1L<<0, close_window, &mlx);
 	mlx_loop(mlx.mlx);
 }
 

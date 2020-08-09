@@ -27,7 +27,7 @@ t_parse		*get_resolution(char *line, t_parse *p_data)
 	if (p_data->res_x == 0 || p_data->res_y == 0)
 	{
 		p_data->map_error = 1;
-		parsing_error_messege('r');		
+		parsing_error_messege('r');
 	}
 	return (p_data);
 }
@@ -44,6 +44,8 @@ t_parse		*check_line(char *line, t_parse *p_data)
 		p_data = get_resolution(line, p_data);		
 	else if (*line == 'N' || *line == 'S' || *line == 'W' || *line == 'E')
 		p_data = get_tex_path(line, p_data);
+	else if (*line == 'F' || *line == 'C')
+		p_data = get_color(line, p_data);
 	else if (ft_isdigit(*line))
 		p_data = parse_map(temp_line, p_data);
 	else
@@ -92,9 +94,9 @@ void	parse(char **file, int map_y_size)
 	}
 	p_data = check_line (line, p_data);
 	free (line);
-	// print_parse_data(p_data);
 	p_data = check_map(p_data);
 	create_game(p_data);
+	
 	free_map(p_data);
 	free(p_data->temp_player);
 }

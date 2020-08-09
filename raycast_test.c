@@ -177,7 +177,7 @@ void	game(t_parse  *p_data, t_mlx mlx, t_img img)
 			colour = 31176;
 		verLine(x, draw, mlx, img, colour);
 
-
+		
 		x++;
 
 	}
