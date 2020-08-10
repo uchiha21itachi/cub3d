@@ -56,7 +56,7 @@ void		create_game(t_parse *p_data)
 		printf("error in creating a new image\n");
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
 	game(p_data, mlx, img);
-	read_keys();
+	// read_keys();
 	// temp = mlx_key_hook(mlx.mlx_win, close_window, &mlx);
 	// printf("keycode - %d\n", temp);
 	

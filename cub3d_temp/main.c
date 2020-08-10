@@ -5,11 +5,13 @@
 	 int i;
 	if (argc < 2 || argc > 3)
 	{
-		arg_error(argv, 'a');
+		arg_error('a');
 		exit(0);
 	}
-	i = check_args(argv, argc);
-
+	if (check_args(argv, argc) == 1)
+		parse(argv);
+	else if (check_args(argv, argc) == 2)
+		take_screenshot(argv);
 	printf ("Exiting the simulation.....\n");
 	while (1);
 	return (0);	 

@@ -44,8 +44,8 @@ t_parse		*check_line(char *line, t_parse *p_data)
 		p_data = get_resolution(line, p_data);		
 	else if (*line == 'N' || *line == 'S' || *line == 'W' || *line == 'E')
 		p_data = get_tex_path(line, p_data);
-	else if (*line == 'F' || *line == 'C')
-		p_data = get_color(line, p_data);
+	// else if (*line == 'F' || *line == 'C')
+		// p_data = get_color(line, p_data);
 	else if (ft_isdigit(*line))
 		p_data = parse_map(temp_line, p_data);
 	else

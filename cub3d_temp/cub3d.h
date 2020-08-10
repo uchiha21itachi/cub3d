@@ -17,7 +17,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <math.h>
-#include "get_next_line.h"
+#include "gnl/get_next_line.h"
 
 typedef	struct	s_img {
 	void	*img;
@@ -91,23 +91,46 @@ typedef struct s_parse {
 	int			**temp_map;
 	int			map_x;
 	int			map_y;
+	int			temp_posX;
+	int			temp_posY;
 	char		*no_path;
 	char		*so_path;
 	char		*we_path;
 	char		*ea_path;
 	char		*s_path;
+	int			parse_error;
 	int			map_start;
 	int			temp_counter;
 	int			*len_arr;
 	int			map_check_ret;
 	int			map_error;
-	t_player	*temp_player;
 }				t_parse;
 
 //errors.c
-void		arg_error(char **argv, char c);
+void		arg_error(char c);
 int			check_args(char **argv, int argc);
 
+//parsing.c
+void    parse(char **argv);
 
+//parsing_utils
+int		check_r_line(char *line);
+
+//libft_utils.c
+char	*remove_space_digit(char *line, char c);
+int		ft_isspace_isdigit(char c, char d);
+int		ft_atoi(const char *str);
+int		get_min(int x, int y);
+
+//grab_map.c
+void    get_resolution(char *line, t_parse *p_data);
+
+
+//parse_errors.c
+void    parsing_error_messege(char c, t_parse *p_data);
+
+
+//save.c
+void        take_screenshot(char **argv);
 
 #endif
