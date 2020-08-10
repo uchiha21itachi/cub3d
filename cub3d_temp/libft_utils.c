@@ -22,14 +22,13 @@ int		ft_isspace_isdigit(char c, char d)
 	{
         if (c == ' ' || c == '\t' || c == '\n' || c == '\v' || c == '\f' || c == '\r')
 		    return (1);
-		return (0);
     }
     else if (d == 'd')
     {
         if (c >= 48 && c <= 57)
 		    return (1);
-	    return (0);    
     }
+	return (0);
 }
 
 int			ft_atoi(const char *str)

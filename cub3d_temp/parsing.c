@@ -22,11 +22,7 @@ void    check_line(char *line, t_parse *p_data)
 	temp_line = ft_strdup(line);
 	line = remove_space_digit(line, 's');
 	if(*line == 'R')
-    {
-	    printf("insdie get resolution\n");
         get_resolution(line, p_data);		
-
-    }
 	// else if (*line == 'N' || *line == 'S' || *line == 'W' || *line == 'E')
 		// p_data = get_tex_path(line, p_data);
 	// else if (*line == 'F' || *line == 'C')
