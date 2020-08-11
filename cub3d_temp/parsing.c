@@ -6,14 +6,14 @@ void    parse_data_init(t_parse *p_data)
 	p_data->res_y = -1;
 	p_data->floor_color = -1;
 	p_data->ceiling_color = -1;
-	p_data->map_x = -1;
+    p_data->parse_error = 0;
+
 	p_data->map_y = -1;
 	p_data->temp_counter = 0;
 	p_data->temp_posX = -1;
 	p_data->temp_posY = -1;
 	p_data->map_check_ret = 1;
 	p_data->map_error = 0;
-    p_data->parse_error = 0;
 }
 
 void    check_line(char *line, t_parse *p_data)
@@ -21,7 +21,7 @@ void    check_line(char *line, t_parse *p_data)
 	int			i;
 	char		*temp_line;
 
-	// temp_line = ft_strdup(line);
+	temp_line = ft_strdup(line);
 	line = remove_space_digit(line, 's');
 	if(*line == 'R')
         get_resolution(line, p_data);		
@@ -33,13 +33,13 @@ void    check_line(char *line, t_parse *p_data)
 		else
 			get_fc_color(line, p_data);
 	}
+	else if (ft_isspace_isdigit(*line, 'd'))
+		parse_map(temp_line, p_data);
 	// else if (*line == 'N' || *line == 'S' || *line == 'W' || *line == 'E')
 		// p_data = get_tex_path(line, p_data);
-	// else if (ft_isdigit(*line))
-		// p_data = parse_map(temp_line, p_data);
 	// else
 		// printf ("Unexpected error occured in check line while parsing \n\n");	
-	// free(temp_line);
+	free(temp_line);
 }
 
 void    parse(char **file)
@@ -65,6 +65,7 @@ void    parse(char **file)
 	}
 	check_line(line, p_data);
 	free (line);
-    printf("resx - [%d] resy - [%d], parse error - [%d]\n", p_data->res_x, p_data->res_y, p_data->parse_error);
-    printf("floor color - [%d] ceiling color - [%d], parse error - [%d]\n", p_data->floor_color, p_data->ceiling_color, p_data->parse_error);
+	print_data_temp(p_data);
+	// free_parse_data(p_data);
+
 }

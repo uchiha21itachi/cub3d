@@ -89,21 +89,21 @@ typedef struct s_parse {
 	int			res_y;
 	int			floor_color;
 	int			ceiling_color;
-	int			**map;
-	int			**temp_map;
-	int			map_x;
-	int			map_y;
-	int			temp_posX;
-	int			temp_posY;
 	char		*no_path;
 	char		*so_path;
 	char		*we_path;
 	char		*ea_path;
 	char		*s_path;
 	int			parse_error;
+
+	int			**map;
+	int			**temp_map;
+	int			*map_x;
+	int			map_y;
+	int			temp_posX;
+	int			temp_posY;	
 	int			map_start;
 	int			temp_counter;
-	int			*len_arr;
 	int			map_check_ret;
 	int			map_error;
 }				t_parse;
@@ -115,12 +115,20 @@ int			check_args(char **argv, int argc);
 //parsing.c
 void    parse(char **argv);
 
+//grab_map.c
+void    get_resolution(char *line, t_parse *p_data);
+void	get_fc_color(char *line, t_parse *p_data);
+
+
+//parse_map.c
+void		parse_map(char *line, t_parse *p_data);
+
+
 //parsing_utils
 int		check_r_line(char *line);
 int		check_color_line(char *line);
 int		check_color_order(char *line);
 int		create_trgb(int t, int r, int g, int b);
-
 
 
 //libft_utils.c
@@ -129,14 +137,14 @@ int		ft_isspace_isdigit(char c, char d);
 int		ft_atoi(const char *str);
 int		get_min(int x, int y);
 
-//grab_map.c
-void    get_resolution(char *line, t_parse *p_data);
-void	get_fc_color(char *line, t_parse *p_data);
 
 
 
 //parse_errors.c
 void    parsing_error_messege(char c, t_parse *p_data);
+void    malloc_error_messege(char c, t_parse *p_data);
+void    print_data_temp(t_parse *p_data);
+
 
 
 //save.c

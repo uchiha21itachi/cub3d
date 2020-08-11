@@ -3,10 +3,10 @@ CC = gcc
 FLAGS = -Wall -Wextra -Werror
 
 # mac compile
-# MLXLIB = -L /usr/local/lib -lmlx -framework OpenGL -framework AppKit
+MLXLIB = -L /usr/local/lib -lmlx -framework OpenGL -framework AppKit
 
 # linux compile
-MLXLIB = -L /usr/local/lib -lmlx -lXext -lX11 -lm -lbsd
+# MLXLIB = -L /usr/local/lib -lmlx -lXext -lX11 -lm -lbsd
 
 NAME = cub3D
 
@@ -14,8 +14,9 @@ SRCS =	main.c \
 save.c \
 parsing.c \
 grab_map.c \
-libft_utils.c \
-parsing_utils.c \
+parse_map.c \
+utils/libft_utils.c \
+utils/parsing_utils.c \
 arg_errors.c \
 parse_errors.c \
 gnl/get_next_line.c \
