@@ -87,6 +87,8 @@ typedef	struct	s_keys
 typedef struct s_parse {
 	int			res_x;
 	int			res_y;
+	int			floor_color;
+	int			ceiling_color;
 	int			**map;
 	int			**temp_map;
 	int			map_x;
@@ -115,6 +117,11 @@ void    parse(char **argv);
 
 //parsing_utils
 int		check_r_line(char *line);
+int		check_color_line(char *line);
+int		check_color_order(char *line);
+int		create_trgb(int t, int r, int g, int b);
+
+
 
 //libft_utils.c
 char	*remove_space_digit(char *line, char c);
@@ -124,6 +131,8 @@ int		get_min(int x, int y);
 
 //grab_map.c
 void    get_resolution(char *line, t_parse *p_data);
+void	get_fc_color(char *line, t_parse *p_data);
+
 
 
 //parse_errors.c
