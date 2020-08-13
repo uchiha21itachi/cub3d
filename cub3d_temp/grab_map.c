@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   grab_map.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yassharm <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/08/12 20:18:13 by yassharm          #+#    #+#             */
+/*   Updated: 2020/08/12 20:18:14 by yassharm         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
-void    get_resolution(char *line, t_parse *p_data)
+void	get_resolution(char *line, t_parse *p_data)
 {
 	if (p_data->res_x != -1 || p_data->res_y != -1)
 		parsing_error_messege('d', p_data);
@@ -19,13 +31,13 @@ void    get_resolution(char *line, t_parse *p_data)
 
 void	get_fc_color(char *line, t_parse *p_data)
 {
-	int 	r;
+	int		r;
 	int		g;
 	int		b;
 	char	c;
 
 	if (check_color_line(line) == 0 || check_color_order(line) == 0)
-		parsing_error_messege('c', p_data);	
+		parsing_error_messege('c', p_data);
 	c = *line;
 	line++;
 	line = remove_space_digit(line, 's');
@@ -41,7 +53,11 @@ void	get_fc_color(char *line, t_parse *p_data)
 	line = remove_space_digit(line, 's');
 	b = ft_atoi(line);
 	if (c == 'F')
-		p_data->floor_color = create_trgb(0,r,g,b);
+		p_data->floor_color = create_trgb(0, r, g, b);
 	else if (c == 'C')
-		p_data->ceiling_color = create_trgb(0,r,g,b);
+		p_data->ceiling_color = create_trgb(0, r, g, b);
+}
+
+void	get_tex_path(char *line, t_parse *p_data)
+{
 }

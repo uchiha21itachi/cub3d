@@ -1,40 +1,52 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   libft_utils.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yassharm <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/08/12 20:19:18 by yassharm          #+#    #+#             */
+/*   Updated: 2020/08/12 20:19:19 by yassharm         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../cub3d.h"
 
 char	*remove_space_digit(char *line, char c)
 {
-    if (c == 's')
-    {
-        while (ft_isspace_isdigit(*line, 's'))
-		line++;
-    }
+	if (c == 's')
+	{
+		while (ft_isspace_isdigit(*line, 's'))
+			line++;
+	}
 	else if (c == 'd')
-    {
-        while (ft_isspace_isdigit(*line, 'd'))
-		line++;
-    }
+	{
+		while (ft_isspace_isdigit(*line, 'd'))
+			line++;
+	}
 	return (line);
 }
 
-
 int		ft_isspace_isdigit(char c, char d)
 {
-    if (d == 's')
+	if (d == 's')
 	{
-        if (c == ' ' || c == '\t' || c == '\n' || c == '\v' || c == '\f' || c == '\r')
-		    return (1);
-    }
-    else if (d == 'd')
-    {
-        if (c >= 48 && c <= 57)
-		    return (1);
-    }
+		if (c == ' ' || c == '\t' || c == '\n' ||
+			c == '\v' || c == '\f' || c == '\r')
+			return (1);
+	}
+	else if (d == 'd')
+	{
+		if (c >= 48 && c <= 57)
+			return (1);
+	}
 	return (0);
 }
 
-int			ft_atoi(const char *str)
+int		ft_atoi(const char *str)
 {
-	int sign;
-	int result;
+	int		sign;
+	int		result;
 
 	sign = 1;
 	result = 0;

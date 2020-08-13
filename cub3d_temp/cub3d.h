@@ -95,40 +95,50 @@ typedef struct s_parse {
 	char		*ea_path;
 	char		*s_path;
 	int			parse_error;
-
 	int			**map;
-	int			**temp_map;
 	int			*map_x;
 	int			map_y;
-	int			temp_posX;
-	int			temp_posY;	
+
 	int			map_start;
-	int			temp_counter;
+	int			temp_posX;
+	int			temp_posY;
+	char		orient;
+	
+	int			**temp_map;
 	int			map_check_ret;
 	int			map_error;
 }				t_parse;
 
-//errors.c
-void		arg_error(char c);
-int			check_args(char **argv, int argc);
 
 //parsing.c
-void    parse(char **argv);
+void	parse(char **argv);
 
 //grab_map.c
-void    get_resolution(char *line, t_parse *p_data);
+void	get_resolution(char *line, t_parse *p_data);
 void	get_fc_color(char *line, t_parse *p_data);
+void	get_tex_path(char *line, t_parse *p_data);
 
 
 //parse_map.c
-void		parse_map(char *line, t_parse *p_data);
+void	parse_map(char *line, t_parse *p_data);
+
+//check_map.c
+void	check_map(t_parse *p_data);
 
 
-//parsing_utils
+
+//parsing_utils.c
 int		check_r_line(char *line);
 int		check_color_line(char *line);
 int		check_color_order(char *line);
 int		create_trgb(int t, int r, int g, int b);
+
+
+// parse_map_utils.c
+void		update_map_size(t_parse *p_data);
+void		update_mapx_size(t_parse *p_data);
+void		grab_position(t_parse *p_data, char c, int y);
+
 
 
 //libft_utils.c
@@ -138,16 +148,18 @@ int		ft_atoi(const char *str);
 int		get_min(int x, int y);
 
 
-
-
 //parse_errors.c
-void    parsing_error_messege(char c, t_parse *p_data);
-void    malloc_error_messege(char c, t_parse *p_data);
-void    print_data_temp(t_parse *p_data);
+void	parsing_error_messege(char c, t_parse *p_data);
+void	malloc_error_messege(char c, t_parse *p_data);
+void	print_data_temp(t_parse *p_data);
+void	free_parse_data(t_parse *p_data);
 
+//arg_errors.c
+void	arg_error(char c);
+int		check_args(char **argv, int argc);
 
 
 //save.c
-void        take_screenshot(char **argv);
+void	take_screenshot(char **argv);
 
 #endif

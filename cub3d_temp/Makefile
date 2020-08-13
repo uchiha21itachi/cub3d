@@ -15,10 +15,12 @@ save.c \
 parsing.c \
 grab_map.c \
 parse_map.c \
+check_map.c \
+utils/parse_map_utils.c \
 utils/libft_utils.c \
 utils/parsing_utils.c \
-arg_errors.c \
-parse_errors.c \
+errors/arg_errors.c \
+errors/parse_errors.c \
 gnl/get_next_line.c \
 gnl/get_next_line_utils.c \
 

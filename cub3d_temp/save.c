@@ -1,7 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   save.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yassharm <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/08/12 20:18:47 by yassharm          #+#    #+#             */
+/*   Updated: 2020/08/12 20:18:49 by yassharm         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
-void        take_screenshot(char **argv)
+void	take_screenshot(char **argv)
 {
-    printf("Taking Screenshot starts...\n");
-
+	printf("Taking Screenshot starts...\n");
 }

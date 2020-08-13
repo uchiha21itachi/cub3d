@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing_utils.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yassharm <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/08/12 20:19:25 by yassharm          #+#    #+#             */
+/*   Updated: 2020/08/12 20:19:28 by yassharm         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../cub3d.h"
 
 int		check_r_line(char *line)
@@ -21,18 +33,17 @@ int		check_r_line(char *line)
 		line++;
 	}
 	if (counter != 2)
-		return(0);
+		return (0);
 	return (1);
 }
 
 int		check_color_line(char *line)
 {
-	int counter_d;
-	int	counter_c;
+	int		counter_d;
+	int		counter_c;
 
 	counter_d = 0;
 	counter_c = 0;
-
 	if (*line == 'F' || *line == 'C')
 		line++;
 	while (*line)
@@ -82,10 +93,12 @@ int		check_color_order(char *line)
 			return (0);
 		line++;
 	}
-	return(1);	
+	return (1);
 }
 
 int		create_trgb(int t, int r, int g, int b)
 {
-	return(t << 24 | r << 16 | g << 8 | b);
+	return (t << 24 | r << 16 | g << 8 | b);
 }
+
+
