@@ -3,31 +3,31 @@ CC = gcc
 FLAGS = -Wall -Wextra -Werror
 
 # mac compile
-# MLXLIB = -L /usr/local/lib -lmlx -framework OpenGL -framework AppKit
+MLXLIB = -L /usr/local/lib -lmlx -framework OpenGL -framework AppKit
 
 # linux compile
-MLXLIB = -L /usr/local/lib -lmlx -lXext -lX11 -lm -lbsd
+# MLXLIB = -L /usr/local/lib -lmlx -lXext -lX11 -lm -lbsd
 
 NAME = cub3D
 
-SRCS =	main.c \
-cub3d.c \
-utils.c \
-parsing.c \
-parsing_texture.c \
-parsing_map.c \
-parsing_map_check.c \
-parsing_utils.c \
-parsing_errors.c \
-create_game.c \
-raycast_test.c \
-get_next_line.c \
-get_next_line_utils.c \
-ft_atoi.c \
+SRCS =	srcs/main.c \
+srcs/save.c \
+srcs/parsing.c \
+srcs/grab_map.c \
+srcs/parse_map.c \
+srcs/check_map.c \
+utils/parse_map_utils.c \
+utils/libft_utils.c \
+utils/parsing_utils.c \
+errors/arg_errors.c \
+errors/parse_errors.c \
+gnl/get_next_line.c \
+gnl/get_next_line_utils.c \
+
 
 
 HEADERS =	cube3d.h \
-			get_next_line.h \
+gnl/get_next_line.h \
 
 OBJECT = $(SRCS:.c=.o)
 
