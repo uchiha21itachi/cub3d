@@ -84,6 +84,8 @@ void	parse(char **file)
 	free(line);
 	if (p_data->parse_error < 1)
 		check_map(p_data);
-	print_data_temp(p_data);
+	draw_game(p_data);
+
+	// print_data_temp(p_data);
 	free_parse_data(p_data);
 }

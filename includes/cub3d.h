@@ -42,6 +42,9 @@ typedef	struct s_game
 {
 	double		posX;
 	double		posY;
+
+
+
 	double		dirX;
 	double		dirY;
 	double		planeX;
@@ -119,6 +122,13 @@ void	parse_map(char *line, t_parse *p_data);
 
 //check_map.c
 void	check_map(t_parse *p_data);
+
+//create_game.c
+void		create_game(t_parse *p_data, t_mlx mlx, t_img img);
+
+//draw.c
+void		draw_game(t_parse *p_data);
+void		verLine(int x, t_draw *draw, t_mlx mlx, t_img img, int color);
 
 
 

@@ -148,7 +148,7 @@ void	print_data_temp(t_parse *p_data)
 		i++;
 	}
 	printf("Player position - [%d][%d]\n Oriantation - [%c]\n",
-			p_data->temp_posX, p_data->temp_posY, p_data->orient);
+			p_data->temp_posY, p_data->temp_posX, p_data->orient);
 }
 
 
