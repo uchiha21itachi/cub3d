@@ -14,7 +14,8 @@
 # define CUB3D_H
 
 # include "../minilibx/mlx.h"
-# include "keys.h"
+// # include "keys.h"
+# include "keys_linux.h"
 # include <stdio.h>
 # include <stdlib.h>
 # include <math.h>
@@ -106,7 +107,7 @@ typedef	struct s_game
 	t_parse		*p_data;
 	t_draw		*d_data;
 	t_mlx		*mlx;
-	t_img		img;
+	t_img		*img;
 }				t_game;
 
 
@@ -127,10 +128,12 @@ void	check_map(t_parse *p_data);
 
 //create_game.c
 void		create_game(t_parse *p_data, t_mlx mlx, t_img img);
+void	game_data_init(t_parse  *p_data, t_game *game, t_draw *d_data, t_mlx *mlx, t_img *img);
+
 
 //draw.c
 void		draw_game(t_parse *p_data);
-void		verLine(int x, t_game *d_data, int color, t_img img);
+void		verLine(int x, t_game *d_data, int color, t_img *img);
 
 //render_map.c
 void		render_map(t_game *g_data);

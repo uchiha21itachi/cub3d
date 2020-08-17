@@ -7,7 +7,7 @@ void	draw_data_init(t_draw *draw)
 	draw->drawEnd = 0;
 }
 
-void	game_data_init(t_parse  *p_data, t_game *game, t_draw *d_data, t_mlx *mlx, t_img img)
+void	game_data_init(t_parse  *p_data, t_game *game, t_draw *d_data, t_mlx *mlx, t_img *img)
 {
 	game->posX = (double)p_data->temp_posX;
 	game->posY = (double)p_data->temp_posY;
@@ -44,13 +44,51 @@ void	game_data_init(t_parse  *p_data, t_game *game, t_draw *d_data, t_mlx *mlx, 
 
 
 
-int			move_player(int keycode, t_game *g_data)
+
+void		create_game(t_parse *p_data, t_mlx mlx, t_img img)
 {
 	
-	//the constant value is in squares/second
 	
-	printf("keycode: [%d]\n", keycode);
-	printf("posX:|%f|\n", g_data->posX);
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	// printf("posY:|%f|\n", g_data->posY);
 	// int xMap;
 	// int yMap;
@@ -59,7 +97,7 @@ int			move_player(int keycode, t_game *g_data)
 	// 	xMap = (int)((g_data->posX + g_data->dirX * moveSpeed));
 	// 	yMap = (int)(g_data->posY);
 	// 	printf("xmap = [%d] ymap = [%d]", xMap, yMap);
-	// 	if(p_data->map[yMap][xMap] == '0')
+		// if(p_data->map[yMap][xMap] == '0')
 	// 		g_data->posX += g_data->dirX * moveSpeed;
 	// 	if(p_data->map[(int)((g_data->posY + g_data->dirY * moveSpeed))][(int)(g_data->posX)] == '0')
 	// 		g_data->posY += g_data->dirY * moveSpeed;
@@ -78,27 +116,3 @@ int			move_player(int keycode, t_game *g_data)
 	// 	printf("****game.player.posY:|%f|\n", g_data->posY);
 	// 	render_map(a_data);
 	// }
-	if(keycode == KEY_ESC)
-			mlx_destroy_window(g_data->mlx->mlx, g_data->mlx->mlx_win);
-	return (keycode);
-}
-
-void		create_game(t_parse *p_data, t_mlx mlx, t_img img)
-{
-	t_game	*g_data;
-	t_draw	*d_data;
-	
-	if (!(g_data = (t_game *)malloc(sizeof(t_game) * 1)))
-		malloc_error_messege('m', p_data);
-	if (!(d_data = (t_draw *)malloc(sizeof(t_draw) * 1)))
-		malloc_error_messege('m', p_data);
-	
-	game_data_init(p_data, g_data, d_data, &mlx, img);
-	render_map(g_data);
-	mlx_hook(mlx.mlx_win, 2, 1L<<0, move_player, g_data);
-
-	free(g_data);
-	free(d_data);
-}
-
-

@@ -10,7 +10,7 @@ void		render_map(t_game *g_data)
 
 	while (x < g_data->p_data->res_x)
 	{
-		printf("\n\nx [%d]\n",x);
+		// printf("\n\nx [%d]\n",x);
 		// printf("player x [%f] y [%f]\n", g_data->posX, g_data->posY);
 
 		g_data->cameraX = 2 * x / (double)g_data->p_data->res_x - 1;
@@ -109,15 +109,16 @@ void		render_map(t_game *g_data)
 
 		if (g_data->p_data->map[g_data->mapY][g_data->mapX] == 1)
 			color = 9830400; //red
+		else
+			color = 9868800; //yellow
+
 		// else if (worldMap[g_data->mapX][g_data->mapY] == 2)
 		// 	color = 30720; //green
 		// else if (worldMap[g_data->mapX][g_data->mapY] == 3)
 		// 	color = 6599880; //blue
 		// else if (worldMap[g_data->mapX][g_data->mapY] == 4)
 		// 	color = 6579300; // grey
-		else
-			color = 9868800; //yellow
-
+	
 		if (g_data->side == 1)
 			color = color/2;
 		// printf("color = [%d] \n", color);
