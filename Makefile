@@ -18,6 +18,7 @@ srcs/parse_map.c \
 srcs/check_map.c \
 srcs/draw.c \
 srcs/create_game.c \
+srcs/render_game.c \
 utils/parse_map_utils.c \
 utils/libft_utils.c \
 utils/parsing_utils.c \

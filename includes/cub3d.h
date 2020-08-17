@@ -14,6 +14,7 @@
 # define CUB3D_H
 
 # include "../minilibx/mlx.h"
+# include "keys.h"
 # include <stdio.h>
 # include <stdlib.h>
 # include <math.h>
@@ -37,36 +38,6 @@ typedef	struct s_player {
 	double	posX;
 	double	posY;
 }				t_player;
-
-typedef	struct s_game
-{
-	double		posX;
-	double		posY;
-
-
-
-	double		dirX;
-	double		dirY;
-	double		planeX;
-	double		planeY;
-	double		time;
-	double		old_time;
-	int			mapX;
-	int			mapY;
-	double		cameraX;
-	double		rayDirX;
-	double		rayDirY;
-	double		sideDistX;
-	double		sideDistY;
-	double		deltaDistX;
-	double		deltaDistY;
-	int			stepX;
-	int			stepY;
-	int			side;
-	double		perWallDist;
-	double		moveSpeed;
-	double		rotSpeed;
-}				t_game;
 
 typedef	struct s_draw
 {
@@ -107,6 +78,37 @@ typedef struct s_parse {
 	char		orient;
 }				t_parse;
 
+typedef	struct s_game
+{
+	double		posX;
+	double		posY;
+	double		dirX;
+	double		dirY;
+	double		planeX;
+	double		planeY;
+	double		time;
+	double		old_time;
+	int			mapX;
+	int			mapY;
+	double		cameraX;
+	double		rayDirX;
+	double		rayDirY;
+	double		sideDistX;
+	double		sideDistY;
+	double		deltaDistX;
+	double		deltaDistY;
+	int			stepX;
+	int			stepY;
+	int			side;
+	double		perWallDist;
+	double		moveSpeed;
+	double		rotSpeed;
+	t_parse		*p_data;
+	t_draw		*d_data;
+	t_mlx		*mlx;
+	t_img		img;
+}				t_game;
+
 
 //parsing.c
 void	parse(char **argv);
@@ -128,8 +130,10 @@ void		create_game(t_parse *p_data, t_mlx mlx, t_img img);
 
 //draw.c
 void		draw_game(t_parse *p_data);
-void		verLine(int x, t_draw *draw, t_mlx mlx, t_img img, int color);
+void		verLine(int x, t_game *d_data, int color, t_img img);
 
+//render_map.c
+void		render_map(t_game *g_data);
 
 
 //parsing_utils.c
