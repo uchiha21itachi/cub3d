@@ -24,6 +24,8 @@ void		verLine(int x, t_game *g_data, int color, t_img *img)
 		my_mlx_pixel_put(img, x, i, g_data->p_data->ceiling_color);
 		i++;
 	}
+		// printf("Later mapX - [%d], mapY [%d]\n", g_data->mapX ,g_data->mapY);
+
 	i = g_data->d_data->drawStart;
 	while (i < g_data->d_data->drawEnd)
 	{
@@ -36,7 +38,7 @@ void		verLine(int x, t_game *g_data, int color, t_img *img)
 		my_mlx_pixel_put(img, x, i, g_data->p_data->floor_color);
 		i++;
 	}
-	mlx_put_image_to_window(g_data->mlx->mlx, g_data->mlx->mlx_win, img->img, 0, 0);
+
 }
 		// printf("xmap = [%d] ymap = [%d]\n", xMap, yMap);
 		// printf("map[%d][%d] - [%d]\n", yMap, xMap, g_data->p_data->map[yMap][xMap]);
@@ -51,7 +53,7 @@ void		verLine(int x, t_game *g_data, int color, t_img *img)
 int			move_player(int keycode, t_game *g_data)
 {
 	
-	printf("keycode: [%d]\n", keycode);
+	// printf("keycode: [%d]\n", keycode);
 	
 	
 	int xMap;
@@ -59,90 +61,17 @@ int			move_player(int keycode, t_game *g_data)
 
 
 	if(keycode == KEY_W)
-	{	
-		xMap = (int)((g_data->posX + g_data->dirX * g_data->moveSpeed));
-		yMap = (int)g_data->posY + g_data->dirY * g_data->moveSpeed;
-		printf("first if map[%d][%d]\n", (int)g_data->posY, xMap);
-
-		if(g_data->p_data->map[(int)(g_data->posY)][xMap] == 0)
-		{
-			g_data->posX += g_data->dirX * g_data->moveSpeed;
-		}
-
-		printf("second if map[%d][%d]\n", yMap, (int)g_data->posX);
-
-		if(g_data->p_data->map[yMap][(int)(g_data->posX)] == 0)
-		{
-			g_data->posY += g_data->dirY * g_data->moveSpeed;
-		}
-
-		render_map(g_data);
-	}
+		move_up(g_data);
 	if(keycode == KEY_S)
-	{
-	
-
-		xMap = (int)g_data->posX - g_data->dirX * g_data->moveSpeed;
-		yMap = (int)g_data->posY - g_data->dirY * g_data->moveSpeed;
-		
-		printf("num max for x [%d]\n", g_data->p_data->map_x[(int)g_data->posY]);
-		printf("y for x[y] - [%d]\n", (int)g_data->posY);
-		if (xMap >= g_data->p_data->map_x[(int)g_data->posY - 1] || 
-			g_data->posX >= g_data->p_data->map_x[(int)g_data->posY] -1)
-			return (keycode);
-		
-		printf("first if map[%d][%d]\n", (int)g_data->posY, xMap);
-		
-		if(g_data->p_data->map[(int)g_data->posY][xMap] == 0)
-		{
-			g_data->posX -= g_data->dirX * g_data->moveSpeed;
-		}
-		printf("second if map[%d][%d]\n", yMap, (int)g_data->posX);
-
-		if(g_data->p_data->map[yMap][(int)g_data->posX] == 0)
-		{
-			g_data->posY -= g_data->dirY * g_data->moveSpeed;
-		}
-		render_map(g_data);
-	}
+		move_down(g_data);
 	if (keycode == KEY_D)
-	{  	
-		g_data->rotSpeed = 1.5708;
-		double oldDirX = g_data->dirX;
-		double tempx = g_data->dirX * cos(-g_data->rotSpeed) - g_data->dirY * sin(-g_data->rotSpeed);
-      	double tempy = oldDirX * sin(-g_data->rotSpeed) + g_data->dirY * cos(-g_data->rotSpeed);
-		xMap = (int)(g_data->posX + tempx * g_data->moveSpeed);
-		yMap = (int)(g_data->posY + tempy * g_data->moveSpeed);
-		
-		printf("first if map[%d][%d]\n", (int)g_data->posY, xMap);
-		if(g_data->p_data->map[(int)g_data->posY][xMap] == 0)
-			g_data->posX += tempx * g_data->moveSpeed;
-
-		printf("second if map[%d][%d]\n", yMap, (int)g_data->posX);
-		if(g_data->p_data->map[yMap][(int)g_data->posX] == 0)
-			g_data->posY += tempy * g_data->moveSpeed;
-		render_map(g_data);
-	}
-
+		move_right(g_data);
 	if(keycode == KEY_A)
-	{	
-		g_data->rotSpeed = -1.5708;
-		double oldDirX = g_data->dirX;
-		double tempx  = g_data->dirX * cos(g_data->rotSpeed) - g_data->dirY * sin(g_data->rotSpeed);
-      	double tempy  = oldDirX * sin(g_data->rotSpeed) + g_data->dirY * cos(g_data->rotSpeed);
-		xMap = (int)(g_data->posX - tempx * g_data->moveSpeed);
-		yMap = (int)(g_data->posY - tempy * g_data->moveSpeed);
-
-
-		printf("first if map[%d][%d]\n", (int)g_data->posY, xMap);
-		if(g_data->p_data->map[(int)g_data->posY][xMap] == 0) 
-			g_data->posX -= tempx * g_data->moveSpeed;
-
-		printf("second if map[%d][%d]\n", yMap, (int)g_data->posX);
-		if(g_data->p_data->map[yMap][(int)g_data->posX] == 0) 
-			g_data->posY -= tempy * g_data->moveSpeed;
-		render_map(g_data);
-	}
+		move_left(g_data);
+	if(keycode == KEY_RIGHT)
+		rotate_right(g_data);
+    if(keycode == KEY_LEFT)
+		rotate_left(g_data);
 	if(keycode == KEY_ESC)
 			mlx_destroy_window(g_data->mlx->mlx, g_data->mlx->mlx_win);
 	return (keycode);
@@ -151,7 +80,7 @@ int			move_player(int keycode, t_game *g_data)
 
 void		draw_game(t_parse *p_data)
 {
-	t_mlx	mlx;
+	t_mlx	*mlx;
 	t_img	img;
 	t_game	*g_data;
 	t_draw	*d_data;
@@ -161,19 +90,28 @@ void		draw_game(t_parse *p_data)
 
 	if (!(g_data = (t_game *)malloc(sizeof(t_game) * 1)))
 		malloc_error_messege('m', p_data);
+	if (!(mlx = (t_mlx *)malloc(sizeof(t_mlx) * 1)))
+		malloc_error_messege('m', p_data);
 
-	if ((mlx.mlx = mlx_init()) == NULL)
+
+	if ((mlx->mlx = p_data->temp_mlx) == NULL)
 		printf("error in initializing the mlx init\n");
-	mlx.mlx_win = mlx_new_window(mlx.mlx, p_data->res_x, p_data->res_y, "cub3d");
-	if ((img.img = mlx_new_image(mlx.mlx, p_data->res_x, p_data->res_y)) == NULL)
-		printf("error in creating a new image\n");
-	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
 	
-	game_data_init(p_data, g_data, d_data, &mlx, &img);
+	mlx->mlx_win = mlx_new_window(mlx->mlx, p_data->res_x, p_data->res_y, "cub3d");
+	
+	if ((img.img = mlx_new_image(mlx->mlx, p_data->res_x, p_data->res_y)) == NULL)
+		printf("error in creating a new image\n");
+	
+	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);	
+	
+	game_data_init(p_data, g_data, d_data, mlx, &img);
 	render_map(g_data);	
+	mlx_put_image_to_window(g_data->mlx->mlx, g_data->mlx->mlx_win, g_data->img->img, 0, 0);
+
 
 	mlx_hook(g_data->mlx->mlx_win, 2, 1L<<0, move_player, g_data);
-	mlx_loop(mlx.mlx);
+	mlx_loop(mlx->mlx);
+	free_game_mlx_data(g_data);
 }
 
 	// create_game(p_data, mlx, img);

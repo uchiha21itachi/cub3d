@@ -14,6 +14,9 @@
 
 void	parse_data_init(t_parse *p_data)
 {
+	int i;
+
+	i = 0;
 	p_data->res_x = -1;
 	p_data->res_y = -1;
 	p_data->floor_color = -1;
@@ -24,7 +27,18 @@ void	parse_data_init(t_parse *p_data)
 	p_data->temp_posX = -1;
 	p_data->temp_posY = -1;
 	p_data->orient = 32;
+	p_data->textwidth = 64;
+	p_data->textheight = 64;
+	p_data->temp_mlx = mlx_init();
+	while(i < 4)
+	{
+		if (!(p_data->textures[i] = (t_texture *)malloc(sizeof(t_texture) * 1)))
+			malloc_error_messege('m', p_data);
+		p_data->textures[i]->counter = 0;
+		i++;
+	}
 }
+
 
 void	check_line(char *line, t_parse *p_data)
 {
@@ -64,7 +78,6 @@ void	parse(char **file)
 	int		ret;
 	t_parse	*p_data;
 
-
 	if ((fd = open(file[1], O_RDONLY)) < 0 ||
 		(p_data = (t_parse *)malloc(sizeof(t_parse))) == NULL)
 	{
@@ -84,8 +97,9 @@ void	parse(char **file)
 	free(line);
 	if (p_data->parse_error < 1)
 		check_map(p_data);
-	draw_game(p_data);
 
+	draw_game(p_data);
 	// print_data_temp(p_data);
+
 	free_parse_data(p_data);
 }

@@ -10,7 +10,7 @@ void		render_map(t_game *g_data)
 
 	while (x < g_data->p_data->res_x)
 	{
-		// printf("\n\nx [%d]\n",x);
+		// printf("rendering starts at x [%d]\n",x);
 		// printf("player x [%f] y [%f]\n", g_data->posX, g_data->posY);
 
 		g_data->cameraX = 2 * x / (double)g_data->p_data->res_x - 1;
@@ -73,7 +73,6 @@ void		render_map(t_game *g_data)
 				hit = 1;
 		}
 	 	// printf("Later sidedistX - [%f], sideDistY [%f]\n", g_data->sideDistX ,g_data->sideDistY);
-		// printf("Later mapX - [%d], mapY [%d]\n", g_data->mapX ,g_data->mapY);
 		// printf("side - [%d]\n", g_data->side);
 		if (g_data->mapX < 0 || g_data->mapY < 0 || g_data->mapY >= g_data->p_data->map_y ||
 			g_data->mapX >= g_data->p_data->map_x[g_data->mapY])
@@ -89,13 +88,14 @@ void		render_map(t_game *g_data)
 			g_data->perWallDist = (g_data->mapY - g_data->posY + (1 - g_data->stepY) / 2) / g_data->rayDirY;
 	 	// printf("perWallDist [%f]\n",g_data->perWallDist);
 		
-		// //  if (g_data->perWallDist <= 0.0000001f)
-		// // {
-		// 	// printf("*******returning\n\n");
-		// 	// printf("game.player.posX:|%f|\n", g_data->posX);	
+		 if (g_data->perWallDist <= 0.0000001f)
+		{
+			printf("*******returning\n\n");
+			// printf("game.player.posX:|%f|\n", g_data->posX);	
 		// 	// printf("game.player.posY:|%f|\n", g_data->posY);
-		//  	// return;
-		// //  }
+		 	return;
+		 }
+
 		g_data->d_data->lineHeight = (int)(g_data->p_data->res_y / g_data->perWallDist);
 		
 		g_data->d_data->drawStart = (-(g_data->d_data->lineHeight) / 2) + g_data->p_data->res_y / 2;
@@ -111,17 +111,12 @@ void		render_map(t_game *g_data)
 			color = 9830400; //red
 		else
 			color = 9868800; //yellow
-
-		// else if (worldMap[g_data->mapX][g_data->mapY] == 2)
-		// 	color = 30720; //green
-		// else if (worldMap[g_data->mapX][g_data->mapY] == 3)
-		// 	color = 6599880; //blue
-		// else if (worldMap[g_data->mapX][g_data->mapY] == 4)
-		// 	color = 6579300; // grey
 	
 		if (g_data->side == 1)
 			color = color/2;
 		// printf("color = [%d] \n", color);
+		// printf("Later mapX - [%d], mapY [%d]\n", g_data->mapX ,g_data->mapY);
+
 		verLine(x, g_data, color, g_data->img);
 
 		x++;

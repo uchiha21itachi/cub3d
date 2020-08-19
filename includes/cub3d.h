@@ -40,24 +40,20 @@ typedef	struct s_player {
 	double	posY;
 }				t_player;
 
-typedef	struct s_draw
-{
+typedef	struct s_draw {
 	int			lineHeight;
 	int			drawStart;
 	int			drawEnd;
 }				t_draw;
 
-typedef	struct	s_keys
-{
-	int			k_up;
-	int			k_down;
-	int			k_left;
-	int			k_right;
-	int			k_a;
-	int			k_s;
-	int			k_d;
-	int			k_w;
-}				t_keys;
+typedef	struct	s_texture {
+	int			counter;
+	int			width;
+	int			height;
+	void		*ptr;
+	char		*filename;
+	char		*data;
+}				t_texture;
 
 typedef struct s_parse {
 	int			res_x;
@@ -77,6 +73,10 @@ typedef struct s_parse {
 	int			temp_posX;
 	int			temp_posY;
 	char		orient;
+	int			textwidth;
+	int			textheight;
+	void		*temp_mlx;
+	t_texture	*textures[4];
 }				t_parse;
 
 typedef	struct s_game
@@ -104,6 +104,7 @@ typedef	struct s_game
 	double		perWallDist;
 	double		moveSpeed;
 	double		rotSpeed;
+	double		rotSpeedX;
 	t_parse		*p_data;
 	t_draw		*d_data;
 	t_mlx		*mlx;
@@ -127,16 +128,25 @@ void	parse_map(char *line, t_parse *p_data);
 void	check_map(t_parse *p_data);
 
 //create_game.c
-void		create_game(t_parse *p_data, t_mlx mlx, t_img img);
+void	create_game(t_parse *p_data, t_mlx mlx, t_img img);
 void	game_data_init(t_parse  *p_data, t_game *game, t_draw *d_data, t_mlx *mlx, t_img *img);
 
 
 //draw.c
-void		draw_game(t_parse *p_data);
-void		verLine(int x, t_game *d_data, int color, t_img *img);
+void	draw_game(t_parse *p_data);
+void	verLine(int x, t_game *d_data, int color, t_img *img);
 
 //render_map.c
-void		render_map(t_game *g_data);
+void	render_map(t_game *g_data);
+
+//movement.c
+void        move_up(t_game  *g_data);
+void        move_down(t_game *g_data);
+void        move_right(t_game *g_data);
+void        move_left(t_game *g_data);
+void    	rotate_left(t_game *g_data);
+void    	rotate_right(t_game *g_data);
+
 
 
 //parsing_utils.c
@@ -144,6 +154,7 @@ int		check_r_line(char *line);
 int		check_color_line(char *line);
 int		check_color_order(char *line);
 int		create_trgb(int t, int r, int g, int b);
+int		check_file_exists(char *filename);
 
 
 // parse_map_utils.c
@@ -168,6 +179,7 @@ void	value_miss_error(char c, t_parse *p_data);
 
 void	print_data_temp(t_parse *p_data);
 void	free_parse_data(t_parse *p_data);
+void	free_game_mlx_data(t_game *g_data);
 
 //arg_errors.c
 void	arg_error(char c);

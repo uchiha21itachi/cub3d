@@ -21,30 +21,18 @@ int		check_r_line(char *line)
 	counter = 0;
 	while (*line)
 	{
-		// printf("line  before [%c] [%s]\n", *line, line);
 		if (ft_isspace_isdigit(*line, 's'))
-		{
 			line = remove_space_digit(line, 's');
-			// printf("line inside isspace [%c] [%s]\n", *line, line);
-		}
 		else if (ft_isspace_isdigit(*line, 'd'))
 		{
-			// printf("line inside isdigit before remove digit[%c] [%s]\n", *line, line);
 			line = remove_space_digit(line, 'd');
-			// printf("line inside isdigit after remove digit[%c] [%s]\n", *line, line);
 			counter++;
 		}
 		else if (*line == '\0')
-		{
-			// printf("line inside else[%c] [%s]\n", *line, line);
 			return (0);
-		}
 	}
 	if (counter != 2)
-	{
-		// printf("problem[01] counter - [%d]\n", counter);
 		return (0);
-	}
 	return (1);
 }
 
@@ -113,3 +101,12 @@ int		create_trgb(int t, int r, int g, int b)
 }
 
 
+int		check_file_exists(char *filename)
+{
+	int fd;
+
+	fd = open(filename, O_RDONLY);
+	if (fd < 0)
+		return (0);
+	return (1);
+}

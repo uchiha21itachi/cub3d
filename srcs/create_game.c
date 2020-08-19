@@ -35,7 +35,8 @@ void	game_data_init(t_parse  *p_data, t_game *game, t_draw *d_data, t_mlx *mlx, 
 	game->side = 0;
 	game->perWallDist = 0;
 	game->moveSpeed = 0.15;
-	game->rotSpeed = 0.0872665;
+	game->rotSpeed = 0.0472665;
+	game->rotSpeedX = 0.0472665;
 	game->p_data = p_data;
 	game->d_data = d_data;
 	game->mlx = mlx;
