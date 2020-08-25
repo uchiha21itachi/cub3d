@@ -5,16 +5,23 @@ void		render_map(t_game *g_data)
 	int		x;
 	int		hit;
 	int		color;
+	int		Zbuffer[g_data->p_data->res_x];
 
 	x = 0;
 
 	while (x < g_data->p_data->res_x)
 	{
-		// printf("rendering starts at x [%d]\n",x);
-		// printf("player x [%f] y [%f]\n", g_data->posX, g_data->posY);
+		if (g_data->posY > g_data->p_data->map_y - 1)
+		return ;
+	if (g_data->posX > g_data->p_data->map_x[(int)g_data->posY])
+		return ;
+		//  printf("x [%d]\n",g_data->p_data->map_x[(int)g_data->posY]);
+		//  printf("pos x [%f]\n",g_data->posX);
+		
+	
 
 		g_data->cameraX = 2 * x / (double)g_data->p_data->res_x - 1;
-		// printf("camera X - [%f]\n", g_data->cameraX);
+					// printf("camera X - [%f]\n", g_data->cameraX);
 
 		g_data->rayDirX = g_data->dirX + g_data->planeX * g_data->cameraX;
 		g_data->rayDirY = g_data->dirY + g_data->planeY * g_data->cameraX;
@@ -86,13 +93,12 @@ void		render_map(t_game *g_data)
 			g_data->perWallDist = (g_data->mapX - g_data->posX + (1 - g_data->stepX) / 2) / g_data->rayDirX;
 		else
 			g_data->perWallDist = (g_data->mapY - g_data->posY + (1 - g_data->stepY) / 2) / g_data->rayDirY;
-	 	// printf("perWallDist [%f]\n",g_data->perWallDist);
 		
 		 if (g_data->perWallDist <= 0.0000001f)
 		{
 			printf("*******returning\n\n");
 			// printf("game.player.posX:|%f|\n", g_data->posX);	
-		// 	// printf("game.player.posY:|%f|\n", g_data->posY);
+			// printf("game.player.posY:|%f|\n", g_data->posY);
 		 	return;
 		 }
 
@@ -105,20 +111,21 @@ void		render_map(t_game *g_data)
 		g_data->d_data->drawEnd = (g_data->d_data->lineHeight / 2) + g_data->p_data->res_y / 2;
 		if (g_data->d_data->drawEnd >= g_data->p_data->res_y)
 			g_data->d_data->drawEnd = g_data->p_data->res_y - 1;
-		
+	 	// printf("perWallDist [%f]\n",g_data->perWallDist);
+		// printf("game.player.posX:|%f|\n", g_data->posX);		
+		draw_texture(g_data, x);
+		// printf("game.player.posY:|%f|\n", g_data->posY);
 
-		if (g_data->p_data->map[g_data->mapY][g_data->mapX] == 1)
-			color = 9830400; //red
-		else
-			color = 9868800; //yellow
-	
-		if (g_data->side == 1)
-			color = color/2;
-		// printf("color = [%d] \n", color);
-		// printf("Later mapX - [%d], mapY [%d]\n", g_data->mapX ,g_data->mapY);
+		Zbuffer[x] = g_data->perWallDist;
+		if ( x == 100)
+		{
+			// printf("Zbuffer at 100 [%d]\n", Zbuffer[x]);
+			printf("perwalldist at 100 [%f]\n", g_data->perWallDist);
 
-		verLine(x, g_data, color, g_data->img);
-
+		}
 		x++;
 	}
+	draw_sprites(g_data, x, Zbuffer);
+	mlx_put_image_to_window(g_data->mlx->mlx, g_data->mlx->mlx_win, g_data->img->img, 0, 0);
+
 }

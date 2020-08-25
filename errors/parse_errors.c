@@ -123,17 +123,6 @@ void	malloc_error_messege(char c, t_parse *p_data)
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 void	print_data_temp(t_parse *p_data)
 {
 	int i;
@@ -141,7 +130,8 @@ void	print_data_temp(t_parse *p_data)
 	i = 0;
 	// printf("resx - [%d] resy - [%d]\n", p_data->res_x, p_data->res_y);
 	// printf("floor color - [%d] ceiling color - [%d]\n",p_data->floor_color, p_data->ceiling_color);
-	printf("texture north - [%s] counter = [%d]\n", p_data->textures[0]->filename, p_data->textures[0]->counter);
+	// printf("texture north - [%s] counter = [%d]\n", p_data->textures[0]->filename, p_data->textures[0]->counter);
+	// printf("sprite path - [%s] size = [%d]\n", p_data->sprites[0]->texture->filename, p_data->sprite_size);
 	i = 0;
 	int j;
 
@@ -160,8 +150,23 @@ void	print_data_temp(t_parse *p_data)
 	}
 	printf("Player position - [%d][%d]\n Oriantation - [%c]\n",
 			p_data->temp_posY, p_data->temp_posX, p_data->orient);
-}
 
+	i = 0;
+	while (i < 5)
+	{
+		printf("texture[%d] - [%s] [%d]\n",i, p_data->textures[i]->filename, p_data->textures[i]->width);
+		i++;
+	}
+	i = 0;
+	while (i < p_data->sprite_size)
+	{
+		printf("pos x - [%f]\n",p_data->sprites[i].posX);
+		printf("pos y - [%f]\n",p_data->sprites[i].posY);
+		printf("sprite width - [%d] \n", p_data->sprites[i].texture->width);
+		i++;
+	}
+}
+// 
 
 void	free_parse_data(t_parse *p_data)
 {
@@ -179,12 +184,17 @@ void	free_parse_data(t_parse *p_data)
 		free(p_data->map_x);
 	}
 	i = 0;
-	while (i < 4)
+	while (i < 5)
 	{
 		free(p_data->textures[i]->filename);
 		free(p_data->textures[i]);
 		i++;
 	}
+	// i = 0;
+	// while(i < p_data->sprite_size)
+	// {
+		free(p_data->sprites);
+	// }
 	free(p_data);
 }
 

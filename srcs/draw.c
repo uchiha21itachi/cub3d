@@ -9,57 +9,58 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
-void		verLine(int x, t_game *g_data, int color, t_img *img)
+
+void		get_pixel_color(t_texture *texture, int x, int y, unsigned char *result)
 {
+
+	int index;
 	int i;
 
-	i = 0;
-	
-	// printf("lineheight - [%d] drawstart - [%d] drawend - [%d]\n", g_data->d_data->lineHeight, g_data->d_data->drawStart, g_data->d_data->drawEnd);
-	// printf("ceiling color - [%d] \n", g_data->p_data->ceiling_color);
-	// printf("floor color - [%d] \n", g_data->p_data->floor_color);
-	// printf("color - [%d] \n", color);
-	while (i < g_data->d_data->drawStart)
+	// printf("texture width - [%d] texture height - [%d]\n", texture->width, texture->height);
+		
+	if (x >= texture->width || y >= texture->height)
+		return ;
+	if (x < 0 || y < 0)
+		return ;
+	index = (x + y * texture->width) * 4;
+	i = -1;
+	while (++i < 4)
 	{
-		my_mlx_pixel_put(img, x, i, g_data->p_data->ceiling_color);
-		i++;
+		result[i] = (int)texture->data[index + i];
 	}
-		// printf("Later mapX - [%d], mapY [%d]\n", g_data->mapX ,g_data->mapY);
-
-	i = g_data->d_data->drawStart;
-	while (i < g_data->d_data->drawEnd)
-	{
-		my_mlx_pixel_put(img, x, i, color);
-		i++;
-	}
-	i = g_data->d_data->drawEnd;
-	while (i < g_data->p_data->res_y)
-	{
-		my_mlx_pixel_put(img, x, i, g_data->p_data->floor_color);
-		i++;
-	}
-
+	// printf("result[0] - [%d]\n", result[0]);
+	// printf("result[1] - [%d]\n", result[1]);
+	// printf("result[2] - [%d]\n", result[2]);
+	// printf("result[3] - [%d]\n", result[3]);
 }
-		// printf("xmap = [%d] ymap = [%d]\n", xMap, yMap);
-		// printf("map[%d][%d] - [%d]\n", yMap, xMap, g_data->p_data->map[yMap][xMap]);
-			// printf("****posX:|%f|\n", g_data->posX);
-			// printf("after****posX:|%f|\n", g_data->posX);
-			// printf("****posY:|%f|\n", g_data->posY);
-			// printf("after****posY:|%f|\n", g_data->posY);
-		// printf("****g_data.player.posX:|%f|\n", g_data->posX);
-		// g_data->posX -= 1;
-		// printf("****after game.player.posX:|%f|\n", g_data->posX);
+
+void	draw_pixel(t_game *g_data, unsigned int x, unsigned int y, unsigned char color[4])
+{
+	int index;
+	int	i;
+
+	if (x >= g_data->p_data->res_x || y >= g_data->p_data->res_y)
+		return ;
+	index = x * 4 + (y * g_data->img->line_length);
+	i = -1;
+	while (++i < 4)
+		g_data->img->addr[index + i] = color[i];
+}
 
 int			move_player(int keycode, t_game *g_data)
 {
+	printf("in\n");
+	if (g_data->posY > g_data->p_data->map_y)
+	{
+		printf("inside return y great\n");
+		return (keycode);
+	}
+	if (g_data->posX > g_data->p_data->map_x[(int)g_data->posY])
+	{
+		printf("inside return X great\n");
+		return (keycode);
+	}
 	
-	// printf("keycode: [%d]\n", keycode);
-	
-	
-	int xMap;
-	int yMap;
-
-
 	if(keycode == KEY_W)
 		move_up(g_data);
 	if(keycode == KEY_S)
@@ -74,6 +75,8 @@ int			move_player(int keycode, t_game *g_data)
 		rotate_left(g_data);
 	if(keycode == KEY_ESC)
 			mlx_destroy_window(g_data->mlx->mlx, g_data->mlx->mlx_win);
+	printf("out\n");
+	
 	return (keycode);
 }
 
@@ -106,17 +109,10 @@ void		draw_game(t_parse *p_data)
 	
 	game_data_init(p_data, g_data, d_data, mlx, &img);
 	render_map(g_data);	
-	mlx_put_image_to_window(g_data->mlx->mlx, g_data->mlx->mlx_win, g_data->img->img, 0, 0);
+	// mlx_put_image_to_window(g_data->mlx->mlx, g_data->mlx->mlx_win, g_data->img->img, 0, 0);
 
 
 	mlx_hook(g_data->mlx->mlx_win, 2, 1L<<0, move_player, g_data);
 	mlx_loop(mlx->mlx);
 	free_game_mlx_data(g_data);
 }
-
-	// create_game(p_data, mlx, img);
-
-// read_keys();
-	// temp = mlx_key_hook(mlx.mlx_win, close_window, &mlx);
-	// printf("keycode - %d\n", temp);
-	

@@ -55,6 +55,12 @@ typedef	struct	s_texture {
 	char		*data;
 }				t_texture;
 
+typedef struct s_sprite{
+	double		posX;
+	double		posY;
+	t_texture	*texture;
+}			t_sprite;
+
 typedef struct s_parse {
 	int			res_x;
 	int			res_y;
@@ -76,7 +82,9 @@ typedef struct s_parse {
 	int			textwidth;
 	int			textheight;
 	void		*temp_mlx;
-	t_texture	*textures[4];
+	int			sprite_size;
+	t_texture	*textures[5];
+	t_sprite	*sprites;
 }				t_parse;
 
 typedef	struct s_game
@@ -122,22 +130,31 @@ void	get_tex_path(char *line, t_parse *p_data);
 
 
 //parse_map.c
-void	parse_map(char *line, t_parse *p_data);
+void		parse_map(char *line, t_parse *p_data);
 
 //check_map.c
-void	check_map(t_parse *p_data);
+void		check_map(t_parse *p_data);
 
 //create_game.c
-void	create_game(t_parse *p_data, t_mlx mlx, t_img img);
-void	game_data_init(t_parse  *p_data, t_game *game, t_draw *d_data, t_mlx *mlx, t_img *img);
+void		game_data_init(t_parse  *p_data, t_game *game, t_draw *d_data, t_mlx *mlx, t_img *img);
+void		draw_texture(t_game *g_data, int x);
 
 
 //draw.c
-void	draw_game(t_parse *p_data);
-void	verLine(int x, t_game *d_data, int color, t_img *img);
+void		draw_game(t_parse *p_data);
+void		my_mlx_pixel_put(t_img *img, int x, int y, int color);
+void		get_pixel_color(t_texture *texture, int x, int y, unsigned char *result);
+void		draw_pixel(t_game *g_data, unsigned int x, unsigned int y, unsigned char color[4]);
+
 
 //render_map.c
-void	render_map(t_game *g_data);
+void		render_map(t_game *g_data);
+
+//sprites.c
+void        draw_sprites(t_game *g_data, int x, int *Zbuffer);
+void		fill_sprites_data(t_parse *p_data);
+
+
 
 //movement.c
 void        move_up(t_game  *g_data);
@@ -150,43 +167,45 @@ void    	rotate_right(t_game *g_data);
 
 
 //parsing_utils.c
-int		check_r_line(char *line);
-int		check_color_line(char *line);
-int		check_color_order(char *line);
-int		create_trgb(int t, int r, int g, int b);
-int		check_file_exists(char *filename);
+int			check_r_line(char *line);
+int			check_color_line(char *line);
+int			check_color_order(char *line);
+int			create_trgb(int t, int r, int g, int b);
+int			check_file_exists(char *filename);
 
 
 // parse_map_utils.c
 void		update_map_size(t_parse *p_data);
 void		update_mapx_size(t_parse *p_data);
 void		grab_position(t_parse *p_data, char c, int y);
+void		set_player_dir(t_game *g_data, t_parse *p_data);
+
 
 
 
 //libft_utils.c
-char	*remove_space_digit(char *line, char c);
-int		ft_isspace_isdigit(char c, char d);
-int		ft_atoi(const char *str);
-int		get_min(int x, int y);
+char		*remove_space_digit(char *line, char c);
+int			ft_isspace_isdigit(char c, char d);
+int			ft_atoi(const char *str);
+int			get_min(int x, int y);
 
 
 //parse_errors.c
-void	parsing_error_messege(char c, t_parse *p_data);
-void	malloc_error_messege(char c, t_parse *p_data);
-void	check_map_error(char c, t_parse *p_data, int x, int y);
-void	value_miss_error(char c, t_parse *p_data);
+void		parsing_error_messege(char c, t_parse *p_data);
+void		malloc_error_messege(char c, t_parse *p_data);
+void		check_map_error(char c, t_parse *p_data, int x, int y);
+void		value_miss_error(char c, t_parse *p_data);
 
-void	print_data_temp(t_parse *p_data);
-void	free_parse_data(t_parse *p_data);
-void	free_game_mlx_data(t_game *g_data);
+void		print_data_temp(t_parse *p_data);
+void		free_parse_data(t_parse *p_data);
+void		free_game_mlx_data(t_game *g_data);
 
 //arg_errors.c
-void	arg_error(char c);
-int		check_args(char **argv, int argc);
+void		arg_error(char c);
+int			check_args(char **argv, int argc);
 
 
 //save.c
-void	take_screenshot(char **argv);
+void		take_screenshot(char **argv);
 
 #endif

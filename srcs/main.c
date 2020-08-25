@@ -12,23 +12,6 @@
 
 #include "../includes/cub3d.h"
 
-// void	test()
-// {
-// 	void	*mlx;
-// 	int		height;
-// 	int		width;
-// 	void	*ret_ptr;
-// 	char 	*file;
-
-// 	if ((mlx = mlx_init()) == NULL)
-// 		printf("error in initializing the mlx init\n");
-// 	file = ft_strdup("./pics/wall.xpm");
-// 	printf("path - [%s]\n", file);
-// 	ret_ptr = mlx_xpm_file_to_image(mlx, file, &width, &height);
-// 	if (ret_ptr == NULL)
-// 		printf("Null pointer babes\n");
-// 	printf("height -%d width - %d\n", width, height);
-// }
 
 
 int		main(int argc, char **argv)
@@ -50,7 +33,3 @@ int		main(int argc, char **argv)
 	return (0);
 }
 
-
-
-
-//check is position should be x y or y x

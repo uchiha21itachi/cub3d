@@ -84,7 +84,6 @@ void	grab_texture(t_parse  *p_data, char *filename, int i)
 	if (p_data->textures[i]->data == 0)
 		value_miss_error('t', p_data);
 	// free (temp);
-
 }	
 
 void	get_tex_path(char *line, t_parse *p_data)
@@ -102,18 +101,17 @@ void	get_tex_path(char *line, t_parse *p_data)
 		i = 3;
 	else if (line[0] == 'S' && line[1] == ' ')
 	{
-		printf("sprite path \n");
-		return ;
+		i = 4;
+		p_data->sprite_size++;
 	}
 	else
 		parsing_error_messege('t', p_data);
 	line += 2;
 	line = remove_space_digit(line, 's');
-
-	if (p_data->textures[i]->counter != 0)
-		parsing_error_messege('d', p_data);
 	if (check_file_exists(line) == 0)
 		parsing_error_messege('t', p_data);
+	if (p_data->textures[i]->counter != 0)
+		parsing_error_messege('d', p_data);
 	grab_texture(p_data, line, i);
 }
 
