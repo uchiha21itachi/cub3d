@@ -32,18 +32,17 @@ typedef	struct	s_img {
 typedef struct s_mlx {
 	void	*mlx;
 	void	*mlx_win;
-	t_img	img;
 }				t_mlx;
-
-typedef	struct s_player {
-	double	posX;
-	double	posY;
-}				t_player;
 
 typedef	struct s_draw {
 	int			lineHeight;
 	int			drawStart;
 	int			drawEnd;
+	double		wallX;
+	double		step;
+	int			texX;
+	int			texY;
+	double		texPos;
 }				t_draw;
 
 typedef	struct	s_texture {
@@ -83,9 +82,32 @@ typedef struct s_parse {
 	int			textheight;
 	void		*temp_mlx;
 	int			sprite_size;
-	t_texture	*textures[5];
+	t_texture	*textures[6];
 	t_sprite	*sprites;
 }				t_parse;
+
+typedef	struct	s_rensp {
+	double		spriteX;
+	double		spriteY;
+	double		invDet;
+	double		transformX;
+	double		transformY;
+	int			sScreenX;
+	int			sHeight;
+	int			sWidth;
+	int			drawStartX;
+	int			drawStartY;
+	int			drawEndX;
+	int			drawEndY;
+	int			texX;
+	int			texY;
+	int			stripe;
+	int			y;
+	int			d;
+	int			*order;
+	double		*dist;
+}				t_rensp;
+
 
 typedef	struct s_game
 {
@@ -113,8 +135,10 @@ typedef	struct s_game
 	double		moveSpeed;
 	double		rotSpeed;
 	double		rotSpeedX;
+	int			hit;
 	t_parse		*p_data;
 	t_draw		*d_data;
+	t_rensp		*sp_r;
 	t_mlx		*mlx;
 	t_img		*img;
 }				t_game;
@@ -136,23 +160,37 @@ void		parse_map(char *line, t_parse *p_data);
 void		check_map(t_parse *p_data);
 
 //create_game.c
-void		game_data_init(t_parse  *p_data, t_game *game, t_draw *d_data, t_mlx *mlx, t_img *img);
+void        game_data_init(t_parse  *p_data, t_game *game);
 void		draw_texture(t_game *g_data, int x);
+void		start_game(t_parse *p_data);
+
+
 
 
 //draw.c
-void		draw_game(t_parse *p_data);
+
+//draw_helper.c
 void		my_mlx_pixel_put(t_img *img, int x, int y, int color);
 void		get_pixel_color(t_texture *texture, int x, int y, unsigned char *result);
-void		draw_pixel(t_game *g_data, unsigned int x, unsigned int y, unsigned char color[4]);
+void		draw_pix(t_game *g, unsigned int x, unsigned int y, unsigned char c[4]);
+int			move_player(int keycode, t_game *g_data);
 
 
 //render_map.c
 void		render_map(t_game *g_data);
 
 //sprites.c
-void        draw_sprites(t_game *g_data, int x, int *Zbuffer);
+void        get_sprites(t_game *g_data, int x, int *zbuffer);
+void		draw_sprites(t_game *g, int *zbuffer, int i);
+void		get_sprite_ren_values(t_game *g, int i);
+void		get_order_distance(t_game *g);
+void		sprite_data_init(t_game *g);
+
+
+
+// sprite_helper.c 
 void		fill_sprites_data(t_parse *p_data);
+void 		sortSprites(t_game *g_data);
 
 
 
@@ -161,6 +199,8 @@ void        move_up(t_game  *g_data);
 void        move_down(t_game *g_data);
 void        move_right(t_game *g_data);
 void        move_left(t_game *g_data);
+
+//rotate.c
 void    	rotate_left(t_game *g_data);
 void    	rotate_right(t_game *g_data);
 

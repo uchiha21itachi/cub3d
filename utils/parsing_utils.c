@@ -38,13 +38,11 @@ int		check_r_line(char *line)
 
 int		check_color_line(char *line)
 {
-	int		counter_d;
-	int		counter_c;
+	int		counter[2];
 
-	counter_d = 0;
-	counter_c = 0;
-	if (*line == 'F' || *line == 'C')
-		line++;
+	counter[0] = 0;
+	counter[1] = 0;
+	line++;
 	while (*line)
 	{
 		if (ft_isspace_isdigit(*line, 's'))
@@ -52,17 +50,17 @@ int		check_color_line(char *line)
 		else if (ft_isspace_isdigit(*line, 'd'))
 		{
 			line = remove_space_digit(line, 'd');
-			counter_d++;
+			counter[0]++;
 		}
 		else if (*line == ',')
 		{
 			line++;
-			counter_c++;
+			counter[1]++;
 		}
 		else
 			return (0);
 	}
-	if (counter_c == 2 && counter_d == 3)
+	if (counter[1] == 2 && counter[0] == 3)
 		return (1);
 	return (0);
 }
@@ -73,10 +71,7 @@ int		check_color_order(char *line)
 
 	counter = 0;
 	if (*line != 'F' && *line != 'C')
-	{
-		printf("error 0\n");
 		return (0);
-	}
 	line++;
 	while (*line)
 	{
@@ -99,7 +94,6 @@ int		create_trgb(int t, int r, int g, int b)
 {
 	return (t << 24 | r << 16 | g << 8 | b);
 }
-
 
 int		check_file_exists(char *filename)
 {

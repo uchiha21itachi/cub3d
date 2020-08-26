@@ -24,17 +24,12 @@ void		init_map(t_parse *p_data)
 	p_data->map_start = 0;
 }
 
-
 void		fill_map(char *line, t_parse *p_data)
 {
 	int		x;
 
-	x = 0;
-	p_data->map_x[p_data->map_y] = (int)ft_strlen(line);
-	if (!(p_data->map[p_data->map_y] = (int *)malloc(sizeof(int) * p_data->map_x[p_data->map_y])))
-		malloc_error_messege('m', p_data);
-
-	while (x < p_data->map_x[p_data->map_y])
+	x = -1;
+	while (++x < p_data->map_x[p_data->map_y])
 	{
 		if (*line == '0')
 			p_data->map[p_data->map_y][x] = 0;
@@ -51,7 +46,6 @@ void		fill_map(char *line, t_parse *p_data)
 			p_data->map[p_data->map_y][x] = 3;
 		else
 			parsing_error_messege('u', p_data);
-		x++;
 		line++;
 	}
 }
@@ -65,10 +59,10 @@ void		parse_map(char *line, t_parse *p_data)
 		update_mapx_size(p_data);
 		update_map_size(p_data);
 	}
+	p_data->map_x[p_data->map_y] = (int)ft_strlen(line);
+	if (!(p_data->map[p_data->map_y] = (int *)malloc(sizeof(int) *
+		p_data->map_x[p_data->map_y])))
+		malloc_error_messege('m', p_data);
 	fill_map(line, p_data);
 	p_data->map_y++;
 }
-
-//sending the sprite number from 1
-//update sprite array it is helpful as exact size of sprites
-//problem for filling sprites (sprites_size - 1) should be the index

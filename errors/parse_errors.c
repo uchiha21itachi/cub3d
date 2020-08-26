@@ -112,6 +112,16 @@ void	malloc_error_messege(char c, t_parse *p_data)
 		p_data->parse_error = 2;
 		printf("Error \n-- while malloc\n Exiting program\n");
 	}
+	else if (c == 'x')
+	{
+		p_data->parse_error = 2;
+		printf("Error \n -- mlx pointer returned NULL\n Exiting the program\n");
+	}
+	else if (c == 'x')
+	{
+		p_data->parse_error = 2;
+		printf("Error \n -- Problem in creating a new image\n Exiting the program\n");
+	}
 }
 
 
@@ -157,12 +167,14 @@ void	print_data_temp(t_parse *p_data)
 		printf("texture[%d] - [%s] [%d]\n",i, p_data->textures[i]->filename, p_data->textures[i]->width);
 		i++;
 	}
+	printf("done printing textures\n");
+	printf("sprite size - [%d] \n", p_data->sprite_size);
 	i = 0;
 	while (i < p_data->sprite_size)
 	{
 		printf("pos x - [%f]\n",p_data->sprites[i].posX);
 		printf("pos y - [%f]\n",p_data->sprites[i].posY);
-		printf("sprite width - [%d] \n", p_data->sprites[i].texture->width);
+		printf("sprite texture - [%s] \n", p_data->sprites[i].texture->filename);
 		i++;
 	}
 }
@@ -207,3 +219,13 @@ void	free_game_mlx_data(t_game *g_data)
 	
 }
 	
+
+
+//Things to free
+
+//1. textures - intit_parse_data - parsing.c
+//2. temp - grab_texture - grab_map.c 
+//3. **map - init_map - parse_map.c
+//3. map_x - init_map - parse_map.c
+//4. *map[] - fill_map - parse_map.c
+//5. g_data - start_game - create_game.c *

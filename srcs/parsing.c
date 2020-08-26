@@ -16,7 +16,7 @@ void	parse_data_init(t_parse *p_data)
 {
 	int i;
 
-	i = 0;  
+	i = 0;
 	p_data->res_x = -1;
 	p_data->res_y = -1;
 	p_data->floor_color = -1;
@@ -30,7 +30,7 @@ void	parse_data_init(t_parse *p_data)
 	p_data->textwidth = 64;
 	p_data->textheight = 64;
 	p_data->temp_mlx = mlx_init();
-	while(i < 5)
+	while (i < 5)
 	{
 		if (!(p_data->textures[i] = (t_texture *)malloc(sizeof(t_texture) * 1)))
 			malloc_error_messege('m', p_data);
@@ -38,9 +38,7 @@ void	parse_data_init(t_parse *p_data)
 		i++;
 	}
 	p_data->sprite_size = -1;
-	
 }
-
 
 void	check_line(char *line, t_parse *p_data)
 {
@@ -50,10 +48,7 @@ void	check_line(char *line, t_parse *p_data)
 	temp_line = ft_strdup(line);
 	line = remove_space_digit(line, 's');
 	if (*line == 'R')
-	{
-		// printf("line -[%s] \n", line);
 		get_resolution(line, p_data);
-	}
 	else if (*line == 'F' || *line == 'C')
 	{
 		if ((*line == 'F' && p_data->floor_color != -1) ||
@@ -73,6 +68,22 @@ void	check_line(char *line, t_parse *p_data)
 	free(temp_line);
 }
 
+void	parse_1(int fd, t_parse *p_data)
+{
+	int		ret;
+	char	*line;
+
+	while ((ret = get_next_line(fd, &line) > 0) && p_data->parse_error < 1)
+	{
+		check_line(line, p_data);
+		free(line);
+	}
+	check_line(line, p_data);
+	free(line);
+	if (p_data->parse_error > 0)
+		arg_error('e');
+}
+
 void	parse(char **file)
 {
 	int		fd;
@@ -87,24 +98,13 @@ void	parse(char **file)
 		exit(0);
 	}
 	parse_data_init(p_data);
-	printf("test\n");
-
-	while ((ret = get_next_line(fd, &line) > 0) && p_data->parse_error < 1)
-	{
-		check_line(line, p_data);
-		free(line);
-	}
-	if (p_data->parse_error < 1)
-		check_line(line, p_data);
-	else
-		arg_error('e');
-	free(line);
+	parse_1(fd, p_data);
 	if (p_data->parse_error < 1)
 		check_map(p_data);
-	fill_sprites_data(p_data);
+	if (p_data->parse_error < 1)
+		fill_sprites_data(p_data);
+	if (p_data->parse_error < 1)
+		start_game(p_data);
 	// print_data_temp(p_data);
-
-	draw_game(p_data);
-
 	free_parse_data(p_data);
 }

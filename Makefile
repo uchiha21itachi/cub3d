@@ -35,10 +35,13 @@ srcs/grab_map.c \
 srcs/parse_map.c \
 srcs/check_map.c \
 srcs/draw.c \
+srcs/draw_helper.c \
 srcs/create_game.c \
 srcs/render_game.c \
 srcs/sprites.c \
+srcs/sprites_helper.c \
 srcs/movement.c \
+srcs/rotate.c \
 utils/parse_map_utils.c \
 utils/libft_utils.c \
 utils/parsing_utils.c \

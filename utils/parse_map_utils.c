@@ -134,7 +134,7 @@ void	set_pos_south(t_game *g_data)
 	g_data->planeY = -0.66;
 }
 
-void	set_pos_east(t_game *g_data)
+void	set_pos_west(t_game *g_data)
 {
 	g_data->dirX = 0;
 	g_data->dirY = 1;
@@ -142,7 +142,7 @@ void	set_pos_east(t_game *g_data)
 	g_data->planeY = 0;
 }
 
-void	set_pos_west(t_game *g_data)
+void	set_pos_east(t_game *g_data)
 {
 	g_data->dirX = 0;
 	g_data->dirY = -1;
