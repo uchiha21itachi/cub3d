@@ -84,6 +84,7 @@ typedef struct s_parse {
 	int			sprite_size;
 	t_texture	*textures[6];
 	t_sprite	*sprites;
+	int			screenshot;
 }				t_parse;
 
 typedef	struct	s_rensp {
@@ -106,6 +107,10 @@ typedef	struct	s_rensp {
 	int			d;
 	int			*order;
 	double		*dist;
+	double		*s_first;
+	double		*s_second;
+	double		tempx;
+	double		tempy;
 }				t_rensp;
 
 
@@ -143,9 +148,20 @@ typedef	struct s_game
 	t_img		*img;
 }				t_game;
 
+typedef	struct	s_screen
+{
+	void	*mlx_ptr;
+	void	*win_ptr;
+	void	*surface;
+	char	*data;
+	int		width;
+	int		height;
+	const char	*title;
+}				t_screen;
+
 
 //parsing.c
-void	parse(char **argv);
+void	parse(char **file, t_parse *p_data);
 
 //grab_map.c
 void	get_resolution(char *line, t_parse *p_data);
@@ -190,7 +206,7 @@ void		sprite_data_init(t_game *g);
 
 // sprite_helper.c 
 void		fill_sprites_data(t_parse *p_data);
-void 		sortSprites(t_game *g_data);
+void		sortsprites(t_game *g);
 
 
 
@@ -221,6 +237,14 @@ void		grab_position(t_parse *p_data, char c, int y);
 void		set_player_dir(t_game *g_data, t_parse *p_data);
 
 
+//position_utils.c
+void	set_pos_north(t_game *g_data);
+void	set_pos_south(t_game *g_data);
+void	set_pos_west(t_game *g_data);
+void	set_pos_east(t_game *g_data);
+
+
+
 
 
 //libft_utils.c
@@ -246,6 +270,6 @@ int			check_args(char **argv, int argc);
 
 
 //save.c
-void		take_screenshot(char **argv);
+void	take_screenshot(t_game *g_data);
 
 #endif

@@ -45,6 +45,8 @@ srcs/rotate.c \
 utils/parse_map_utils.c \
 utils/libft_utils.c \
 utils/parsing_utils.c \
+utils/parsing_utils_2.c \
+utils/position_utils.c \
 errors/arg_errors.c \
 errors/parse_errors.c \
 

@@ -17,6 +17,8 @@ void	sprite_data_init(t_game *g)
 	g->sp_r->stripe = 0;
 	g->sp_r->y = 0;
 	g->sp_r->d = 0;
+	g->sp_r->tempx = 0;
+	g->sp_r->tempy = 0;
 	if (!(g->sp_r->order = (int *)malloc((g->p_data->sprite_size) *
 		sizeof(int))))
 		malloc_error_messege('m', g->p_data);
@@ -39,6 +41,7 @@ void	get_order_distance(t_game *g)
 					* (g->posX - g->p_data->sprites[i].posX));
 		i++;
 	}
+	printf("\n\n");
 }
 
 void	get_sprite_ren_values(t_game *g, int i)
@@ -105,7 +108,7 @@ void	get_sprites(t_game *g_data, int x, int *zbuffer)
 	i = 0;
 	sprite_data_init(g_data);
 	get_order_distance(g_data);
-	sortSprites(g_data);
+	sortsprites(g_data);
 	i = 0;
 	while (i < g_data->p_data->sprite_size)
 	{

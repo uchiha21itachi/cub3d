@@ -84,15 +84,14 @@ void	parse_1(int fd, t_parse *p_data)
 		arg_error('e');
 }
 
-void	parse(char **file)
+void	parse(char **file, t_parse *p_data)
 {
 	int		fd;
 	char	*line;
 	int		ret;
-	t_parse	*p_data;
+	// t_parse	*p_data;
 
-	if ((fd = open(file[1], O_RDONLY)) < 0 ||
-		(p_data = (t_parse *)malloc(sizeof(t_parse))) == NULL)
+	if ((fd = open(file[1], O_RDONLY)) < 0)
 	{
 		arg_error('f');
 		exit(0);
@@ -106,5 +105,5 @@ void	parse(char **file)
 	if (p_data->parse_error < 1)
 		start_game(p_data);
 	// print_data_temp(p_data);
-	free_parse_data(p_data);
+	// free_parse_data(p_data);
 }
