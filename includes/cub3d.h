@@ -190,6 +190,7 @@ void		my_mlx_pixel_put(t_img *img, int x, int y, int color);
 void		get_pixel_color(t_texture *texture, int x, int y, unsigned char *result);
 void		draw_pix(t_game *g, unsigned int x, unsigned int y, unsigned char c[4]);
 int			move_player(int keycode, t_game *g_data);
+int			close_window(int keycode, t_game *g_data);
 
 
 //render_map.c

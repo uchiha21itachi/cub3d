@@ -60,9 +60,8 @@ void	start_game(t_parse *p_data)
 	render_map(g_data);
 	if (p_data->screenshot == 1)
 	{
-		printf("yes inside\n");
 		take_screenshot(g_data);
-		mlx_hook(g_data->mlx->mlx_win, 2, 1L << 0, move_player, g_data);
+		mlx_hook(g_data->mlx->mlx_win, 2, 1L << 0, close_window, g_data);
 		mlx_loop(g_data->mlx->mlx);
 	}
 	else

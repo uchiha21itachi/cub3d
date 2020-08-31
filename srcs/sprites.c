@@ -41,7 +41,6 @@ void	get_order_distance(t_game *g)
 					* (g->posX - g->p_data->sprites[i].posX));
 		i++;
 	}
-	printf("\n\n");
 }
 
 void	get_sprite_ren_values(t_game *g, int i)
@@ -93,7 +92,7 @@ void	draw_sprites(t_game *g, int *zbuffer, int i)
 				g->sp_r->sHeight) / 256;
 			get_pixel_color(g->p_data->sprites[g->sp_r->order[i]].texture,
 				g->sp_r->texX, g->sp_r->texY, color);
-			if (color[0] != 0 || color[1] != 0 || color[2] != 0 ||
+			if (color[1] != 0 || color[2] != 0 ||
 				color[3] != 0)
 				draw_pix(g, g->sp_r->stripe, g->sp_r->y, color);
 			g->sp_r->y++;

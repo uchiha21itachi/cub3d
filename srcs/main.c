@@ -51,4 +51,4 @@ int		main(int argc, char **argv)
 //3. Keys linux mac
 //4. Norminiette
 //5. Clean Exit
-//6. 
+//6. map opening when sprites

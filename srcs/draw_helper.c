@@ -21,7 +21,6 @@ void	get_pixel_color(t_texture *texture, int x, int y, unsigned char *result)
 	i = -1;
 	while (++i < 4)
 		result[i] = (int)texture->data[index + i];
-	// printf("result[1] = %d\n",result[0]);
 }
 
 void	draw_pix(t_game *g, unsigned int x, unsigned int y, unsigned char c[4])
@@ -57,5 +56,14 @@ int		move_player(int keycode, t_game *g_data)
 		rotate_left(g_data);
 	if (keycode == KEY_ESC)
 		mlx_destroy_window(g_data->mlx->mlx, g_data->mlx->mlx_win);
+	return (keycode);
+}
+
+int		close_window(int keycode, t_game *g_data)
+{
+	if (keycode == KEY_ESC)
+	{
+		mlx_destroy_window(g_data->mlx->mlx, g_data->mlx->mlx_win);
+	}
 	return (keycode);
 }

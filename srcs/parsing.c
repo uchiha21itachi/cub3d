@@ -105,5 +105,5 @@ void	parse(char **file, t_parse *p_data)
 	if (p_data->parse_error < 1)
 		start_game(p_data);
 	// print_data_temp(p_data);
-	// free_parse_data(p_data);
+	free_parse_data(p_data);
 }

@@ -85,7 +85,8 @@ int		check_color_order(char *line)
 		counter++;
 		if (*line != ',' && counter < 3)
 			return (0);
-		line++;
+		if (*line != '\0')
+			line++;
 	}
 	return (1);
 }

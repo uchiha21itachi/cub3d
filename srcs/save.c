@@ -64,6 +64,7 @@ static void	bmp_pixels(t_game *game,  int fd, int pad, t_screen *s_win)
 	unsigned int	i;
 	unsigned int	j;
 	int				color;
+	int				temp;
 
 	i = -1;
 	while (++i < 3)
@@ -75,8 +76,8 @@ static void	bmp_pixels(t_game *game,  int fd, int pad, t_screen *s_win)
 		while (j < game->p_data->res_x)
 		{
 			color = get_pixel(game, j, i, s_win);
-			write(fd, &color, 3);
-			write(fd, &zero, pad);
+			temp = write(fd, &color, 3);
+			temp = write(fd, &zero, pad);
 			j++;
 		}
 		i++;

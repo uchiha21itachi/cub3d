@@ -53,6 +53,14 @@ void	sortsprites(t_game *g)
 		g->sp_r->order[i] = g->sp_r->s_second[g->p_data->sprite_size - i - 1];
 		i++;
 	}
+	i = 0;
+	// while (i < g->p_data->sprite_size)
+	// {
+		// printf("order[%d] - [%d]\n", i, g->sp_r->order[i]);
+		// printf("dist[%d] - [%f]\n", i, g->sp_r->dist[i]);
+		// i++;
+	// }
+	// printf("\n");
 	free(g->sp_r->s_first);
 	free(g->sp_r->s_second);
 }
