@@ -12,13 +12,12 @@
 
 #include "../includes/cub3d.h"
 
-
-
 int		main(int argc, char **argv)
 {
 	t_parse *p_data;
 
-	if((p_data = (t_parse *)malloc(sizeof(t_parse))) == NULL)
+	ft_putstr("Starting Cub3d...\n");
+	if ((p_data = (t_parse *)malloc(sizeof(t_parse))) == NULL)
 		arg_error('f');
 	if (argc < 2 || argc > 3)
 	{
@@ -35,20 +34,9 @@ int		main(int argc, char **argv)
 		p_data->screenshot = 1;
 		parse(argv, p_data);
 	}
-	printf("testint===========\n");
-	printf("Exiting the simulation.....\n");
+	ft_putstr("Exiting the simulation.....\n");
 	while (1)
 	{
 	}
 	return (0);
 }
-
-
-
-//Things left
-//1. Memory free
-//2. Sprite bug
-//3. Keys linux mac
-//4. Norminiette
-//5. Clean Exit
-//6. map opening when sprites

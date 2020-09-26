@@ -77,7 +77,6 @@ void	grab_texture(t_parse *p_data, char *filename, int i)
 	&temp_arr[0], &temp_arr[1], &temp_arr[2]);
 	if (p_data->textures[i]->data == 0)
 		value_miss_error('t', p_data);
-	// free (temp);
 }
 
 void	get_tex_path(char *line, t_parse *p_data)

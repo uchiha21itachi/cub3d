@@ -5,8 +5,8 @@ void	move_up(t_game *g_data)
 	int			xmap;
 	int			ymap;
 
-	xmap = (int)((g_data->posX + g_data->dirX * g_data->moveSpeed));
-	ymap = (int)g_data->posY + g_data->dirY * g_data->moveSpeed;
+	xmap = (int)(g_data->posX + g_data->dirX * g_data->moveSpeed);
+	ymap = (int)(g_data->posY + g_data->dirY * g_data->moveSpeed);
 	if (g_data->p_data->map[(int)(g_data->posY)][xmap] == 0)
 		g_data->posX += g_data->dirX * g_data->moveSpeed;
 	if (g_data->p_data->map[ymap][(int)(g_data->posX)] == 0)
@@ -19,8 +19,8 @@ void	move_down(t_game *g_data)
 	int			xmap;
 	int			ymap;
 
-	xmap = (int)g_data->posX - g_data->dirX * g_data->moveSpeed;
-	ymap = (int)g_data->posY - g_data->dirY * g_data->moveSpeed;
+	xmap = (int)(g_data->posX - g_data->dirX * g_data->moveSpeed);
+	ymap = (int)(g_data->posY - g_data->dirY * g_data->moveSpeed);
 	if (g_data->p_data->map[(int)g_data->posY][xmap] == 0)
 		g_data->posX -= g_data->dirX * g_data->moveSpeed;
 	if (g_data->p_data->map[ymap][(int)g_data->posX] == 0)

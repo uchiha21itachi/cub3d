@@ -77,3 +77,18 @@ int		get_min(int x, int y)
 	else
 		return (x);
 }
+
+void	ft_putstr(char *str)
+{
+	int		len;
+	int		i;
+	int		ret;
+
+	i = 0;
+	len = ft_strlen(str);
+	while (i < len)
+	{
+		ret = write(1, &str[i], 1);
+		i++;
+	}
+}

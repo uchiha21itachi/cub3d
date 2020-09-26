@@ -38,7 +38,7 @@ void	get_order_distance(t_game *g)
 		g->sp_r->dist[i] = ((g->posX - g->p_data->sprites[i].posX)
 					* (g->posX - g->p_data->sprites[i].posX)
 					+ (g->posY - g->p_data->sprites[i].posY)
-					* (g->posX - g->p_data->sprites[i].posX));
+					* (g->posY - g->p_data->sprites[i].posY));
 		i++;
 	}
 }

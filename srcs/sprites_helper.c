@@ -30,7 +30,6 @@ void	sort(t_game *g)
 void	sortsprites(t_game *g)
 {
 	int		i;
-	int		j;
 
 	if (!(g->sp_r->s_first = (double *)malloc(g->p_data->sprite_size *
 		(sizeof(double)))))
@@ -38,12 +37,11 @@ void	sortsprites(t_game *g)
 	if (!(g->sp_r->s_second = (double *)malloc(g->p_data->sprite_size *
 		(sizeof(double)))))
 		malloc_error_messege('m', g->p_data);
-	i = 0;
-	while (i < g->p_data->sprite_size)
+	i = -1;
+	while (++i < g->p_data->sprite_size)
 	{
 		g->sp_r->s_first[i] = g->sp_r->dist[i];
 		g->sp_r->s_second[i] = g->sp_r->order[i];
-		i++;
 	}
 	sort(g);
 	i = 0;
@@ -54,13 +52,6 @@ void	sortsprites(t_game *g)
 		i++;
 	}
 	i = 0;
-	// while (i < g->p_data->sprite_size)
-	// {
-		// printf("order[%d] - [%d]\n", i, g->sp_r->order[i]);
-		// printf("dist[%d] - [%f]\n", i, g->sp_r->dist[i]);
-		// i++;
-	// }
-	// printf("\n");
 	free(g->sp_r->s_first);
 	free(g->sp_r->s_second);
 }

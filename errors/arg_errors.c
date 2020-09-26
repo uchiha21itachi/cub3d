@@ -12,7 +12,7 @@
 
 #include "../includes/cub3d.h"
 
-void		arg_error(char c)
+void	arg_error(char c)
 {
 	if (c == 'a')
 		printf("Wrong Number of arguments\n");
@@ -25,7 +25,7 @@ void		arg_error(char c)
 	else if (c == 'c')
 		printf("Error while malloc \n");
 	else if (c == 'e')
-		printf("Error while Parsing.. Exiting the interface... ... ... .\n");
+		printf("Error while Parsing.. Exiting the interface... .\n");
 }
 
 int		check_dot(char *line)
@@ -57,6 +57,17 @@ int		check_save(char *line)
 	return (-1);
 }
 
+int		check_cub(char *temp, int len)
+{
+	int		ret;
+
+	ret = 0;
+	if (temp[len - 4] == '.' && temp[len - 3] == 'c' &&
+		temp[len - 2] == 'u' && temp[len - 1] == 'b')
+		ret = 1;
+	return (ret);
+}
+
 int		check_args(char **argv, int argc)
 {
 	char	*temp;
@@ -64,8 +75,7 @@ int		check_args(char **argv, int argc)
 
 	temp = ft_strdup(argv[1]);
 	len = ft_strlen(temp);
-	if (!(temp[len - 4] == '.' && temp[len - 3] == 'c' &&
-		temp[len - 2] == 'u' && temp[len - 1] == 'b' && check_dot(temp)))
+	if (!(check_cub(temp, len)))
 	{
 		arg_error('m');
 		free(temp);

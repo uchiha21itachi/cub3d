@@ -148,18 +148,6 @@ typedef	struct s_game
 	t_img		*img;
 }				t_game;
 
-typedef	struct	s_screen
-{
-	void	*mlx_ptr;
-	void	*win_ptr;
-	void	*surface;
-	char	*data;
-	int		width;
-	int		height;
-	const char	*title;
-}				t_screen;
-
-
 //parsing.c
 void	parse(char **file, t_parse *p_data);
 
@@ -177,13 +165,16 @@ void		check_map(t_parse *p_data);
 
 //create_game.c
 void        game_data_init(t_parse  *p_data, t_game *game);
-void		draw_texture(t_game *g_data, int x);
 void		start_game(t_parse *p_data);
 
 
-
-
 //draw.c
+void		draw_texture(t_game *g_data, int x);
+
+//free_data.c
+void	free_parse_data(t_parse *p_data);
+void	free_game_mlx_data(t_game *g_data);
+
 
 //draw_helper.c
 void		my_mlx_pixel_put(t_img *img, int x, int y, int color);
@@ -253,6 +244,13 @@ char		*remove_space_digit(char *line, char c);
 int			ft_isspace_isdigit(char c, char d);
 int			ft_atoi(const char *str);
 int			get_min(int x, int y);
+void	ft_putstr(char *str);
+
+//save_utils.c
+void	int_to_char(int n, unsigned char *src);
+int		get_pixel(t_game *g_data, unsigned int x, unsigned int y);
+
+
 
 
 //parse_errors.c

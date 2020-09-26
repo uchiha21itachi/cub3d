@@ -60,7 +60,7 @@ void		check_map(t_parse *p_data)
 	{
 		while (x < p_data->map_x[y])
 		{
-			if (p_data->map[y][x] == 0)
+			if (p_data->map[y][x] == 0 || p_data->map[y][x] == 2)
 			{
 				check_lr(x, y, p_data);
 				check_ud(x, y, p_data);

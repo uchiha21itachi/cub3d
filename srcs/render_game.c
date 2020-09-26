@@ -97,7 +97,5 @@ void	render_map(t_game *g)
 		x++;
 	}
 	get_sprites(g, x, zbuffer);
-	if (g->p_data->screenshot == 0)
-		mlx_put_image_to_window(g->mlx->mlx, g->mlx->mlx_win, g->img->img, 0, 0);
+	mlx_put_image_to_window(g->mlx->mlx, g->mlx->mlx_win, g->img->img, 0, 0);
 }
-
