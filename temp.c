@@ -26,7 +26,7 @@ void	print_data_temp(t_parse *p_data)
 		i++;
 	}
 	printf("Player position - [%d][%d]\n Oriantation - [%c]\n",
-			p_data->temp_posY, p_data->temp_posX, p_data->orient);
+			p_data->temp_posy, p_data->temp_posx, p_data->orient);
 
 	i = 0;
 	while (i < 5)
@@ -56,5 +56,5 @@ void	print_data_temp(t_parse *p_data)
 //4. Norminiette
 //5. Clean Exit
 //6. map opening when sprites(Fixed not 100 per sure)
-//7. fsanitize while --save
+//7. fsanitize while --save (Fixed)
 //8. four wall covered test(Fixed)

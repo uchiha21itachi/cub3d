@@ -5,16 +5,16 @@ void	rotate_right(t_game *g_data)
 	double		olddirx;
 	double		oldplanex;
 
-	olddirx = g_data->dirX;
-	g_data->dirX = g_data->dirX * cos(-g_data->rotSpeedX) - g_data->dirY *
-		sin(-g_data->rotSpeedX);
-	g_data->dirY = olddirx * sin(-g_data->rotSpeedX) + g_data->dirY *
-		cos(-g_data->rotSpeedX);
-	oldplanex = g_data->planeX;
-	g_data->planeX = g_data->planeX * cos(-g_data->rotSpeedX) -
-		g_data->planeY * sin(-g_data->rotSpeedX);
-	g_data->planeY = oldplanex * sin(-g_data->rotSpeedX) +
-		g_data->planeY * cos(-g_data->rotSpeedX);
+	olddirx = g_data->dirx;
+	g_data->dirx = g_data->dirx * cos(-g_data->rotspeedx) - g_data->diry *
+		sin(-g_data->rotspeedx);
+	g_data->diry = olddirx * sin(-g_data->rotspeedx) + g_data->diry *
+		cos(-g_data->rotspeedx);
+	oldplanex = g_data->planex;
+	g_data->planex = g_data->planex * cos(-g_data->rotspeedx) -
+		g_data->planey * sin(-g_data->rotspeedx);
+	g_data->planey = oldplanex * sin(-g_data->rotspeedx) +
+		g_data->planey * cos(-g_data->rotspeedx);
 	render_map(g_data);
 }
 
@@ -23,15 +23,15 @@ void	rotate_left(t_game *g_data)
 	double		olddirx;
 	double		oldplanex;
 
-	olddirx = g_data->dirX;
-	g_data->dirX = g_data->dirX * cos(g_data->rotSpeedX) -
-		g_data->dirY * sin(g_data->rotSpeedX);
-	g_data->dirY = olddirx * sin(g_data->rotSpeedX) +
-		g_data->dirY * cos(g_data->rotSpeedX);
-	oldplanex = g_data->planeX;
-	g_data->planeX = g_data->planeX * cos(g_data->rotSpeedX) -
-		g_data->planeY * sin(g_data->rotSpeedX);
-	g_data->planeY = oldplanex * sin(g_data->rotSpeedX) +
-		g_data->planeY * cos(g_data->rotSpeedX);
+	olddirx = g_data->dirx;
+	g_data->dirx = g_data->dirx * cos(g_data->rotspeedx) -
+		g_data->diry * sin(g_data->rotspeedx);
+	g_data->diry = olddirx * sin(g_data->rotspeedx) +
+		g_data->diry * cos(g_data->rotspeedx);
+	oldplanex = g_data->planex;
+	g_data->planex = g_data->planex * cos(g_data->rotspeedx) -
+		g_data->planey * sin(g_data->rotspeedx);
+	g_data->planey = oldplanex * sin(g_data->rotspeedx) +
+		g_data->planey * cos(g_data->rotspeedx);
 	render_map(g_data);
 }

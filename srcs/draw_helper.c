@@ -38,9 +38,9 @@ void	draw_pix(t_game *g, unsigned int x, unsigned int y, unsigned char c[4])
 
 int		move_player(int keycode, t_game *g_data)
 {
-	if (g_data->posY > g_data->p_data->map_y)
+	if (g_data->posy > g_data->p_data->map_y)
 		return (keycode);
-	if (g_data->posX > g_data->p_data->map_x[(int)g_data->posY])
+	if (g_data->posx > g_data->p_data->map_x[(int)g_data->posy])
 		return (keycode);
 	if (keycode == KEY_W)
 		move_up(g_data);

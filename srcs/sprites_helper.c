@@ -63,8 +63,8 @@ int		fill(t_parse *p, int y, int x, int i)
 		if (i < p->sprite_size)
 		{
 			p->sprites[i].texture = p->textures[4];
-			p->sprites[i].posX = x + 0.5;
-			p->sprites[i].posY = y + 0.5;
+			p->sprites[i].posx = x + 0.5;
+			p->sprites[i].posy = y + 0.5;
 			i++;
 		}
 	}

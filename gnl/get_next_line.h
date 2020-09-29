@@ -20,9 +20,9 @@
 # include <limits.h>
 # include <stdio.h>
 
-#ifndef BUFFER_SIZE
-# define BUFFER_SIZE 1024
-#endif
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 1024
+# endif
 
 int			get_next_line(int fd, char **line);
 size_t		ft_strlen(char *s);

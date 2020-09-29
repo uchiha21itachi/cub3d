@@ -2,14 +2,14 @@
 
 void	grab_position(t_parse *p_data, char c, int y)
 {
-	if (p_data->temp_posX != -1 || p_data->temp_posY != -1 ||
+	if (p_data->temp_posx != -1 || p_data->temp_posy != -1 ||
 		p_data->orient != 32)
 	{
 		parsing_error_messege('p', p_data);
 		return ;
 	}
-	p_data->temp_posX = y;
-	p_data->temp_posY = p_data->map_y;
+	p_data->temp_posx = y;
+	p_data->temp_posy = p_data->map_y;
 	p_data->orient = c;
 	p_data->map[p_data->map_y][y] = 0;
 }

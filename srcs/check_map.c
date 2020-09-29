@@ -8,7 +8,7 @@ void		check_init_values(t_parse *p_data)
 		value_miss_error('c', p_data);
 	if (p_data->map_start == -1)
 		value_miss_error('m', p_data);
-	if (p_data->temp_posX == -1 || p_data->temp_posY == -1 ||
+	if (p_data->temp_posx == -1 || p_data->temp_posy == -1 ||
 		p_data->orient == 32)
 		value_miss_error('p', p_data);
 }

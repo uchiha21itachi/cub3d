@@ -2,14 +2,14 @@
 
 void	draw_data_init(t_game *game)
 {
-	game->d_data->lineHeight = 0;
-	game->d_data->drawStart = 0;
-	game->d_data->drawEnd = 0;
-	game->d_data->wallX = 0;
-	game->d_data->texX = 0;
-	game->d_data->texY = 0;
+	game->d_data->lineheight = 0;
+	game->d_data->drawstart = 0;
+	game->d_data->drawend = 0;
+	game->d_data->wallx = 0;
+	game->d_data->tex_x = 0;
+	game->d_data->tex_y = 0;
 	game->d_data->step = 0;
-	game->d_data->texPos = 0;
+	game->d_data->texpos = 0;
 }
 
 void	mlx_data_init(t_game *g)
@@ -37,13 +37,13 @@ void	game_data_init(t_parse *p_data, t_game *game)
 		malloc_error_messege('m', p_data);
 	if (!(game->img = (t_img*)malloc(sizeof(t_img) * 1)))
 		malloc_error_messege('m', p_data);
-	game->posX = (double)p_data->temp_posX + 0.5;
-	game->posY = (double)p_data->temp_posY + 0.5;
+	game->posx = (double)p_data->temp_posx + 0.5;
+	game->posy = (double)p_data->temp_posy + 0.5;
 	game->side = 0;
-	game->perWallDist = 0;
-	game->moveSpeed = 0.15;
-	game->rotSpeed = 0.0472665;
-	game->rotSpeedX = 0.0472665;
+	game->perwalldist = 0;
+	game->movespeed = 0.15;
+	game->rotspeed = 0.0472665;
+	game->rotspeedx = 0.0472665;
 	game->p_data = p_data;
 	draw_data_init(game);
 	set_player_dir(game, p_data);

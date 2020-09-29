@@ -3,72 +3,72 @@
 void	get_draw_values(t_game *g)
 {
 	if (g->side == 0)
-		g->perWallDist = (g->mapX - g->posX + (1 - g->stepX) / 2) / g->rayDirX;
+		g->perwalldist = (g->mapx - g->posx + (1 - g->stepx) / 2) / g->raydirx;
 	else
-		g->perWallDist = (g->mapY - g->posY + (1 - g->stepY) / 2) / g->rayDirY;
-	if (g->perWallDist <= 0.0000001f)
+		g->perwalldist = (g->mapy - g->posy + (1 - g->stepy) / 2) / g->raydiry;
+	if (g->perwalldist <= 0.0000001f)
 		return ;
-	g->d_data->lineHeight = (int)(g->p_data->res_y / g->perWallDist);
-	g->d_data->drawStart = (-(g->d_data->lineHeight) / 2) +
+	g->d_data->lineheight = (int)(g->p_data->res_y / g->perwalldist);
+	g->d_data->drawstart = (-(g->d_data->lineheight) / 2) +
 		g->p_data->res_y / 2;
-	if (g->d_data->drawStart < 0)
-		g->d_data->drawStart = 0;
-	g->d_data->drawEnd = (g->d_data->lineHeight / 2) + g->p_data->res_y / 2;
-	if (g->d_data->drawEnd >= g->p_data->res_y)
-		g->d_data->drawEnd = g->p_data->res_y - 1;
+	if (g->d_data->drawstart < 0)
+		g->d_data->drawstart = 0;
+	g->d_data->drawend = (g->d_data->lineheight / 2) + g->p_data->res_y / 2;
+	if (g->d_data->drawend >= g->p_data->res_y)
+		g->d_data->drawend = g->p_data->res_y - 1;
 }
 
 void	dda(t_game *g)
 {
-	if (g->sideDistX < g->sideDistY)
+	if (g->sidedistx < g->sidedisty)
 	{
-		g->sideDistX += g->deltaDistX;
-		g->mapX += g->stepX;
+		g->sidedistx += g->deltadistx;
+		g->mapx += g->stepx;
 		g->side = 0;
 	}
 	else
 	{
-		g->sideDistY += g->deltaDistY;
-		g->mapY += g->stepY;
+		g->sidedisty += g->deltadisty;
+		g->mapy += g->stepy;
 		g->side = 1;
 	}
-	if (g->p_data->map[g->mapY][g->mapX] == 1)
+	if (g->p_data->map[g->mapy][g->mapx] == 1)
 		g->hit = 1;
 }
 
 void	get_render_values_help(t_game *g, int x)
 {
-	if (g->rayDirX < 0)
+	if (g->raydirx < 0)
 	{
-		g->stepX = -1;
-		g->sideDistX = (g->posX - g->mapX) * g->deltaDistX;
+		g->stepx = -1;
+		g->sidedistx = (g->posx - g->mapx) * g->deltadistx;
 	}
 	else
 	{
-		g->stepX = 1;
-		g->sideDistX = (g->mapX + 1.0 - g->posX) * g->deltaDistX;
+		g->stepx = 1;
+		g->sidedistx = (g->mapx + 1.0 - g->posx) * g->deltadistx;
 	}
-	if (g->rayDirY < 0)
+	if (g->raydiry < 0)
 	{
-		g->stepY = -1;
-		g->sideDistY = (g->posY - g->mapY) * g->deltaDistY;
+		g->stepy = -1;
+		g->sidedisty = (g->posy - g->mapy) * g->deltadisty;
 	}
 	else
 	{
-		g->stepY = 1;
-		g->sideDistY = (g->mapY + 1.0 - g->posY) * g->deltaDistY;
+		g->stepy = 1;
+		g->sidedisty = (g->mapy + 1.0 - g->posy) * g->deltadisty;
 	}
 }
 
 void	get_render_values(t_game *g, int x)
 {
-	g->cameraX = 2 * x / (double)g->p_data->res_x - 1;
-	g->rayDirX = g->dirX + g->planeX * g->cameraX;
-	g->rayDirY = g->dirY + g->planeY * g->cameraX;
-	g->mapX = (int)g->posX;
-	g->mapY = (int)g->posY;
-	g->deltaDistX = fabs(1 / g->rayDirX);
-	g->deltaDistY = fabs(1 / g->rayDirY);
+	g->camerax = 2 * x / (double)g->p_data->res_x - 1;
+	g->raydirx = g->dirx + g->planex * g->camerax;
+	g->raydiry = g->diry + g->planey * g->camerax;
+	g->mapx = (int)g->posx;
+	g->mapy = (int)g->posy;
+	g->deltadistx = fabs(1 / g->raydirx);
+	g->deltadisty = fabs(1 / g->raydiry);
 	get_render_values_help(g, x);
 }
 
@@ -80,20 +80,20 @@ void	render_map(t_game *g)
 	x = 0;
 	while (x < g->p_data->res_x)
 	{
-		if (g->posY > g->p_data->map_y - 1 || g->posY < 0 || g->posX < 0 ||
-		(g->posX > g->p_data->map_x[(int)g->posY]))
+		if (g->posy > g->p_data->map_y - 1 || g->posy < 0 || g->posx < 0 ||
+		(g->posx > g->p_data->map_x[(int)g->posy]))
 			return ;
-		if (g->p_data->map[(int)g->posY][(int)g->posX] == 1)
+		if (g->p_data->map[(int)g->posy][(int)g->posx] == 1)
 			return ;
 		get_render_values(g, x);
 		g->hit = 0;
 		while (g->hit == 0)
 			dda(g);
 		get_draw_values(g);
-		if (g->perWallDist <= 0.0000001f)
+		if (g->perwalldist <= 0.0000001f)
 			return ;
 		draw_texture(g, x);
-		zbuffer[x] = g->perWallDist;
+		zbuffer[x] = g->perwalldist;
 		x++;
 	}
 	get_sprites(g, x, zbuffer);

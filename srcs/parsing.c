@@ -24,8 +24,8 @@ void	parse_data_init(t_parse *p_data)
 	p_data->parse_error = 0;
 	p_data->map_y = 0;
 	p_data->map_start = -1;
-	p_data->temp_posX = -1;
-	p_data->temp_posY = -1;
+	p_data->temp_posx = -1;
+	p_data->temp_posy = -1;
 	p_data->orient = 32;
 	p_data->textwidth = 64;
 	p_data->textheight = 64;
