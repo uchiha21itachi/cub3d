@@ -30,6 +30,8 @@ int		check_r_line(char *line)
 		}
 		else if (*line == '\0')
 			return (0);
+		else
+			return (0);
 	}
 	if (counter != 2)
 		return (0);

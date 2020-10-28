@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   render_game.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yassharm <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/08/12 20:18:41 by yassharm          #+#    #+#             */
+/*   Updated: 2020/08/12 20:18:43 by yassharm         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/cub3d.h"
 
 void	get_draw_values(t_game *g)
@@ -32,11 +44,11 @@ void	dda(t_game *g)
 		g->mapy += g->stepy;
 		g->side = 1;
 	}
-	if (g->p_data->map[g->mapy][g->mapx] == 1)
+	if (g->p_data->map[g->mapx][g->mapy] == 1)
 		g->hit = 1;
 }
 
-void	get_render_values_help(t_game *g, int x)
+void	get_render_values_help(t_game *g)
 {
 	if (g->raydirx < 0)
 	{
@@ -69,7 +81,7 @@ void	get_render_values(t_game *g, int x)
 	g->mapy = (int)g->posy;
 	g->deltadistx = fabs(1 / g->raydirx);
 	g->deltadisty = fabs(1 / g->raydiry);
-	get_render_values_help(g, x);
+	get_render_values_help(g);
 }
 
 void	render_map(t_game *g)
@@ -81,9 +93,9 @@ void	render_map(t_game *g)
 	while (x < g->p_data->res_x)
 	{
 		if (g->posy > g->p_data->map_y - 1 || g->posy < 0 || g->posx < 0 ||
-		(g->posx > g->p_data->map_x[(int)g->posy]))
+		(g->posx > g->p_data->map_x))
 			return ;
-		if (g->p_data->map[(int)g->posy][(int)g->posx] == 1)
+		if (g->p_data->map[(int)g->posx][(int)g->posy] == 1)
 			return ;
 		get_render_values(g, x);
 		g->hit = 0;
@@ -96,6 +108,6 @@ void	render_map(t_game *g)
 		zbuffer[x] = g->perwalldist;
 		x++;
 	}
-	get_sprites(g, x, zbuffer);
+	get_sprites(g, zbuffer);
 	mlx_put_image_to_window(g->mlx->mlx, g->mlx->mlx_win, g->img->img, 0, 0);
 }

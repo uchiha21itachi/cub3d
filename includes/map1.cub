@@ -1,0 +1,18 @@
+
+SO ./pics/lava.xpm
+EA ./pics/bluebrick.xpm
+WE ./pics/stone.xpm
+S ./pics/knight.xpm
+
+
+NO ./pics/stone.xpm
+
+C  0  , 120, 255
+F 100 ,100 , 0111
+
+R 1000 1000
+
+1111111111
+11N111111
+1000200011111
+1111111111

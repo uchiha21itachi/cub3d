@@ -72,7 +72,7 @@ int		ft_atoi(const char *str)
 
 int		get_min(int x, int y)
 {
-	if (x > y)
+	if (x > y || x < 0)
 		return (y);
 	else
 		return (x);
@@ -91,4 +91,5 @@ void	ft_putstr(char *str)
 		ret = write(1, &str[i], 1);
 		i++;
 	}
+	(void)ret;
 }

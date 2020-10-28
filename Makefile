@@ -17,32 +17,33 @@ CC=gcc
 
 
 NAME = cub3D
-CC = gcc -fsanitize=address -g# C compiler
-# -fsanitize=address
+CC = gcc  # C compiler
+# -fsanitize=address -g3
 
 #CFLAGS = -Wall -Werror -Wextra -I. -Ilibft/. -c  # C flags
 INCLUDES =  -Isrc -Ignl # C flags
 
-CFLAGS	= -Ofast -D OS=$(OS)  $(INCLUDES)
+CFLAGS	= -Wall -Werror -Wextra -D OS=$(OS)  $(INCLUDES)
 
 RM = rm -f   # rm command
 
-#include all your main .c files here
+
 SRCS =	srcs/main.c \
 srcs/save.c \
 srcs/parsing.c \
 srcs/grab_map.c \
 srcs/parse_map.c \
 srcs/check_map.c \
+srcs/sprites_helper.c \
 srcs/draw.c \
 srcs/draw_helper.c \
 srcs/create_game.c \
 srcs/render_game.c \
 srcs/sprites.c \
-srcs/sprites_helper.c \
 srcs/movement.c \
 srcs/rotate.c \
 srcs/free_data.c \
+srcs/window.c \
 utils/parse_map_utils.c \
 utils/libft_utils.c \
 utils/parsing_utils.c \
@@ -50,7 +51,8 @@ utils/parsing_utils_2.c \
 utils/position_utils.c \
 errors/arg_errors.c \
 errors/parse_errors.c \
-temp.c \
+#include all your main .c files here
+
 
 
 GNL_SRCS = gnl/get_next_line.c \
@@ -76,6 +78,7 @@ clean:
 
 fclean: clean
 	rm -f $(NAME)
+	rm -f screenshot.bmp
 	#make -C $(LIBFT_DIR) fclean
 	#make -C $(MLX_DIR) fclean
 

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sprites.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yassharm <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/08/12 20:18:41 by yassharm          #+#    #+#             */
+/*   Updated: 2020/08/12 20:18:43 by yassharm         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/cub3d.h"
 
 void	sprite_data_init(t_game *g)
@@ -92,15 +104,13 @@ void	draw_sprites(t_game *g, int *zbuffer, int i)
 				g->sp_r->sheight) / 256;
 			get_pixel_color(g->p_data->sprites[g->sp_r->order[i]].texture,
 				g->sp_r->tex_x, g->sp_r->tex_y, color);
-			if (color[1] != 0 || color[2] != 0 ||
-				color[3] != 0)
-				draw_pix(g, g->sp_r->stripe, g->sp_r->y, color);
+			draw_check(g, color);
 			g->sp_r->y++;
 		}
 	}
 }
 
-void	get_sprites(t_game *g_data, int x, int *zbuffer)
+void	get_sprites(t_game *g_data, int *zbuffer)
 {
 	int		i;
 

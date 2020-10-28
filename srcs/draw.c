@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yassharm <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/08/12 20:18:41 by yassharm          #+#    #+#             */
+/*   Updated: 2020/08/12 20:18:43 by yassharm         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/cub3d.h"
 
 void	grab_draw_tex_values(t_game *g)
@@ -54,13 +66,13 @@ void	draw_walls(t_game *g, int x)
 			(g->p_data->textheight - 1);
 		g->d_data->texpos += g->d_data->step;
 		if (g->side == 0 && g->raydirx < 0)
-			j = 0;
-		else if (g->side == 0 && g->raydirx >= 0)
-			j = 1;
-		else if (g->side == 1 && g->raydiry < 0)
-			j = 2;
-		else
 			j = 3;
+		else if (g->side == 0 && g->raydirx >= 0)
+			j = 2;
+		else if (g->side == 1 && g->raydiry < 0)
+			j = 0;
+		else
+			j = 1;
 		get_pixel_color(g->p_data->textures[j], g->d_data->tex_x,
 			g->d_data->tex_y, color);
 		draw_pix(g, x, i, color);

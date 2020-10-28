@@ -1,4 +1,31 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sprites_helper.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yassharm <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/08/12 20:18:41 by yassharm          #+#    #+#             */
+/*   Updated: 2020/08/12 20:18:43 by yassharm         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/cub3d.h"
+
+void	draw_check(t_game *g, unsigned char color[4])
+{
+	if (COLOR_CODE == 1)
+	{
+		if (color[1] != 0 || color[2] != 0 ||
+			color[3] != 0)
+			draw_pix(g, g->sp_r->stripe, g->sp_r->y, color);
+	}
+	else
+	{
+		if (color[3] != 255)
+			draw_pix(g, g->sp_r->stripe, g->sp_r->y, color);
+	}
+}
 
 void	sort(t_game *g)
 {
@@ -56,9 +83,9 @@ void	sortsprites(t_game *g)
 	free(g->sp_r->s_second);
 }
 
-int		fill(t_parse *p, int y, int x, int i)
+int		fill(t_parse *p, int x, int y, int i)
 {
-	if (p->map[y][x] == 2)
+	if (p->map[x][y] == 2)
 	{
 		if (i < p->sprite_size)
 		{
@@ -80,17 +107,20 @@ void	fill_sprites_data(t_parse *p_data)
 	x = 0;
 	y = 0;
 	i = 0;
-	if (!(p_data->sprites = (t_sprite *)malloc(sizeof(t_sprite) *
-		p_data->sprite_size)))
-		malloc_error_messege('m', p_data);
-	while (y < p_data->map_y)
+	if (p_data->sprite_size > 0)
 	{
-		while (x < p_data->map_x[y])
+		if (!(p_data->sprites = (t_sprite *)malloc(sizeof(t_sprite) *
+		p_data->sprite_size)))
+			malloc_error_messege('m', p_data);
+	}
+	while (x < p_data->map_x)
+	{
+		while (y < p_data->map_y)
 		{
-			i = fill(p_data, y, x, i);
-			x++;
+			i = fill(p_data, x, y, i);
+			y++;
 		}
-		x = 0;
-		y++;
+		y = 0;
+		x++;
 	}
 }

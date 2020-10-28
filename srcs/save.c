@@ -34,8 +34,8 @@ int			get_pixel(t_game *g_data, unsigned int x, unsigned int y)
 static void	bmp_pixels(t_game *game, int fd, int pad)
 {
 	unsigned char	zero[3];
-	unsigned int	i;
-	unsigned int	j;
+	int				i;
+	int				j;
 	int				color;
 	int				temp;
 
@@ -55,6 +55,7 @@ static void	bmp_pixels(t_game *game, int fd, int pad)
 		}
 		i++;
 	}
+	(void)temp;
 }
 
 static void	bmp_header(t_game *game, int fd, int filesize)
@@ -76,6 +77,7 @@ static void	bmp_header(t_game *game, int fd, int filesize)
 	data[26] = (unsigned char)(1);
 	data[28] = (unsigned char)(24);
 	temp = write(fd, data, 54);
+	(void)temp;
 }
 
 void		take_screenshot(t_game *g_data)
@@ -85,8 +87,6 @@ void		take_screenshot(t_game *g_data)
 	int				pad;
 
 	ft_putstr("Taking Screenshot starts...\n");
-	mlx_put_image_to_window(g_data->mlx->mlx,
-	g_data->mlx->mlx_win, g_data->img->img, 0, 0);
 	pad = (4 - (g_data->p_data->res_x * 3) % 4) % 4;
 	filesize = 54 + (3 * (g_data->p_data->res_x + pad) * g_data->p_data->res_y);
 	if ((fd = open("screenshot.bmp", O_WRONLY | O_CREAT |

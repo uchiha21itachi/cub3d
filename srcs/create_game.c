@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   create_game.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yassharm <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/08/12 20:18:41 by yassharm          #+#    #+#             */
+/*   Updated: 2020/10/27 16:42:43 by yassharm         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/cub3d.h"
 
 void	draw_data_init(t_game *game)
@@ -56,18 +68,18 @@ void	start_game(t_parse *p_data)
 
 	if (!(g_data = (t_game *)malloc(sizeof(t_game) * 1)))
 		malloc_error_messege('m', p_data);
+	fill_sprites_data(p_data);
 	game_data_init(p_data, g_data);
 	render_map(g_data);
 	if (p_data->screenshot == 1)
 	{
 		take_screenshot(g_data);
-		mlx_hook(g_data->mlx->mlx_win, 2, 1L << 0, close_window, g_data);
-		mlx_loop(g_data->mlx->mlx);
+		stop_game_all(g_data);
 	}
 	else
 	{
 		mlx_hook(g_data->mlx->mlx_win, 2, 1L << 0, move_player, g_data);
+		mlx_hook(g_data->mlx->mlx_win, 17, 1L << 17, cross_window, g_data);
 		mlx_loop(g_data->mlx->mlx);
 	}
-	free_game_mlx_data(g_data);
 }

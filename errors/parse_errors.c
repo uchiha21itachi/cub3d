@@ -29,6 +29,10 @@ void	parsing_error_messege(char c, t_parse *p_data)
 		ft_putstr("Error-\n Player position twice in the map \n\n");
 	else if (c == 't')
 		ft_putstr("Error-\n Texture file not opening (Invalid File)\n\n");
+	else if (c == 'z')
+		ft_putstr("Error-\n Wrong Texture file extension (Invalid File)\n\n");
+	else if (c == 'j')
+		ft_putstr("Error-\n Color value out of permitted range (0-255)\n\n");
 }
 
 void	check_map_error(char c, t_parse *p_data, int x, int y)
@@ -42,6 +46,8 @@ void	check_map_error(char c, t_parse *p_data, int x, int y)
 		ft_putstr("Error-\n Map open at right \n\n");
 	else if (c == 'l')
 		ft_putstr("Error-\n Map open at left \n\n");
+	(void)x;
+	(void)y;
 }
 
 void	value_miss_error(char c, t_parse *p_data)
@@ -59,12 +65,17 @@ void	value_miss_error(char c, t_parse *p_data)
 	else if (c == 'p')
 	{
 		ft_putstr("Error- \n Map file does not");
-		ft_putstr("contain player initial position \n\n");
+		ft_putstr(" contain player initial position \n\n");
 	}
 	else if (c == 't')
 	{
 		ft_putstr("Error-\n Cannot read or get the texture");
-		ft_putstr("from specified location\n\n");
+		ft_putstr(" from specified location\n\n");
+	}
+	else if (c == 'z')
+	{
+		ft_putstr("Error-\n One of texture file missing ");
+		ft_putstr("from map file\n\n");
 	}
 }
 
@@ -81,6 +92,6 @@ void	malloc_error_messege(char c, t_parse *p_data)
 	else if (c == 'x')
 	{
 		ft_putstr("Error \n -- Problem in creating a new");
-		ft_putstr("image \n Exiting the program\n");
+		ft_putstr(" image \n Exiting the program\n");
 	}
 }

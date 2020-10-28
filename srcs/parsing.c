@@ -23,6 +23,7 @@ void	parse_data_init(t_parse *p_data)
 	p_data->ceiling_color = -1;
 	p_data->parse_error = 0;
 	p_data->map_y = 0;
+	p_data->map_x = 0;
 	p_data->map_start = -1;
 	p_data->temp_posx = -1;
 	p_data->temp_posy = -1;
@@ -42,7 +43,6 @@ void	parse_data_init(t_parse *p_data)
 
 void	check_line(char *line, t_parse *p_data)
 {
-	int			i;
 	char		*temp_line;
 
 	temp_line = ft_strdup(line);
@@ -58,10 +58,10 @@ void	check_line(char *line, t_parse *p_data)
 			get_fc_color(line, p_data);
 	}
 	else if (*line == 'N' || *line == 'S' || *line == 'W' || *line == 'E')
-		get_tex_path(line, p_data);
+		get_tex_path(line, p_data, temp_line);
 	else if (ft_isspace_isdigit(*line, 'd') && p_data->map_start < 1)
 		parse_map(temp_line, p_data);
-	else if (p_data->map_start == 0 && *line == '\0')
+	else if (p_data->map_start == 0 && *temp_line == '\0')
 		parsing_error_messege('e', p_data);
 	else if (*line != '\0')
 		parsing_error_messege('u', p_data);
@@ -87,22 +87,19 @@ void	parse_1(int fd, t_parse *p_data)
 void	parse(char **file, t_parse *p_data)
 {
 	int		fd;
-	char	*line;
-	int		ret;
 
 	if ((fd = open(file[1], O_RDONLY)) < 0)
 	{
 		arg_error('f');
+		free(p_data);
 		exit(0);
 	}
 	parse_data_init(p_data);
 	parse_1(fd, p_data);
 	if (p_data->parse_error < 1)
-	{
 		check_map(p_data);
-		fill_sprites_data(p_data);
-	}
 	if (p_data->parse_error < 1)
 		start_game(p_data);
 	free_parse_data(p_data);
+	free(p_data);
 }

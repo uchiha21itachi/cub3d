@@ -1,60 +1,36 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_map_utils.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yassharm <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/08/12 20:18:41 by yassharm          #+#    #+#             */
+/*   Updated: 2020/08/12 20:18:43 by yassharm         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/cub3d.h"
 
-void		copy_1(t_parse *p_data, int **temp_map)
+void		copy1(t_parse *p_data, int **temp_map)
 {
-	int		i;
-	int		j;
+	int		x;
+	int		y;
 
-	i = 0;
-	j = 0;
-	while (i < p_data->map_y)
+	x = 0;
+	y = 0;
+	while (x < p_data->map_x)
 	{
-		while (j < p_data->map_x[i])
+		while (y < p_data->map_y)
 		{
-			temp_map[i][j] = p_data->map[i][j];
-			j++;
+			if (x < p_data->x_arr[y])
+				temp_map[x][y] = p_data->map[x][y];
+			else
+				temp_map[x][y] = 3;
+			y++;
 		}
-		j = 0;
-		i++;
-	}
-}
-
-void		copy_2(t_parse *p_data, int **temp_map)
-{
-	int		i;
-	int		j;
-
-	j = 0;
-	i = 0;
-	while (i < p_data->map_y)
-	{
-		while (j < p_data->map_x[i])
-		{
-			p_data->map[i][j] = temp_map[i][j];
-			j++;
-		}
-		j = 0;
-		i++;
-	}
-}
-
-void		update_s(t_parse *p_data)
-{
-	int i;
-
-	i = -1;
-	while (++i < p_data->map_y)
-		free(p_data->map[i]);
-	free(p_data->map);
-	if (!(p_data->map = (int **)malloc(sizeof(int *) *
-		(p_data->map_y + 1))))
-		malloc_error_messege('m', p_data);
-	i = 0;
-	while (i < p_data->map_y)
-	{
-		if (!(p_data->map[i] = (int *)malloc(sizeof(int) * p_data->map_x[i])))
-			malloc_error_messege('m', p_data);
-		i++;
+		y = 0;
+		x++;
 	}
 }
 
@@ -62,47 +38,48 @@ void		update_map_size(t_parse *p_data)
 {
 	int		**temp_map;
 	int		i;
-	int		j;
 
 	i = 0;
-	if (!(temp_map = (int **)malloc(sizeof(int *) * p_data->map_y)))
+	if (!(temp_map = (int **)malloc(sizeof(int *) * p_data->map_x)))
 		malloc_error_messege('m', p_data);
-	while (i < p_data->map_y)
+	while (i < p_data->map_x)
 	{
-		if (!(temp_map[i] = (int *)malloc(sizeof(int) * p_data->map_x[i])))
+		if (!(temp_map[i] = (int *)malloc(sizeof(int) * (p_data->map_y + 1))))
 			malloc_error_messege('m', p_data);
 		i++;
 	}
-	copy_1(p_data, temp_map);
-	update_s(p_data);
-	copy_2(p_data, temp_map);
-	i = -1;
-	while (++i < p_data->map_y)
-		free(temp_map[i]);
-	free(temp_map);
+	copy1(p_data, temp_map);
+	i = 0;
+	while (i < p_data->x_arr[p_data->map_y - 1])
+	{
+		free(p_data->map[i]);
+		i++;
+	}
+	free(p_data->map);
+	p_data->map = temp_map;
 }
 
-void		update_mapx_size(t_parse *p_data)
+void		update_xarr_size(t_parse *p_data)
 {
-	int		*temp_mapx;
+	int		*temp_x_arr;
 	int		i;
 
 	i = 0;
-	if (!(temp_mapx = (int*)malloc((p_data->map_y) * sizeof(int))))
+	if (!(temp_x_arr = (int*)malloc((p_data->map_y) * sizeof(int))))
 		malloc_error_messege('m', p_data);
 	while (i < p_data->map_y)
 	{
-		temp_mapx[i] = p_data->map_x[i];
+		temp_x_arr[i] = p_data->x_arr[i];
 		i++;
 	}
-	free(p_data->map_x);
-	if (!(p_data->map_x = (int*)malloc((p_data->map_y + 1) * sizeof(int))))
+	free(p_data->x_arr);
+	if (!(p_data->x_arr = (int*)malloc((p_data->map_y + 1) * sizeof(int))))
 		malloc_error_messege('m', p_data);
 	i = 0;
 	while (i < p_data->map_y)
 	{
-		p_data->map_x[i] = temp_mapx[i];
+		p_data->x_arr[i] = temp_x_arr[i];
 		i++;
 	}
-	free(temp_mapx);
+	free(temp_x_arr);
 }

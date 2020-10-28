@@ -15,17 +15,17 @@
 void	arg_error(char c)
 {
 	if (c == 'a')
-		printf("Wrong Number of arguments\n");
+		ft_putstr("Wrong Number of arguments\n");
 	else if (c == 'm')
-		printf("wrong map file extention/type \n");
+		ft_putstr("wrong map file extention/type \n");
 	else if (c == 's')
-		printf("wrong second argument (not --save) \n");
+		ft_putstr("wrong second argument (not --save) \n");
 	else if (c == 'f')
-		printf("Error opening the file fd < 0 \n");
+		ft_putstr("Error opening the file fd < 0 \n");
 	else if (c == 'c')
-		printf("Error while malloc \n");
+		ft_putstr("Error while malloc \n");
 	else if (c == 'e')
-		printf("Error while Parsing.. Exiting the interface... .\n");
+		ft_putstr("Error while Parsing.. Exiting the interface... .\n");
 }
 
 int		check_dot(char *line)
@@ -62,6 +62,8 @@ int		check_cub(char *temp, int len)
 	int		ret;
 
 	ret = 0;
+	if (len < 4)
+		return (0);
 	if (temp[len - 4] == '.' && temp[len - 3] == 'c' &&
 		temp[len - 2] == 'u' && temp[len - 1] == 'b')
 		ret = 1;

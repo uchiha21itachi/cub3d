@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw_helper.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yassharm <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/08/12 20:18:41 by yassharm          #+#    #+#             */
+/*   Updated: 2020/08/12 20:18:43 by yassharm         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/cub3d.h"
 
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
@@ -28,42 +40,10 @@ void	draw_pix(t_game *g, unsigned int x, unsigned int y, unsigned char c[4])
 	int index;
 	int	i;
 
-	if (x >= g->p_data->res_x || y >= g->p_data->res_y)
+	if ((int)x >= g->p_data->res_x || (int)y >= g->p_data->res_y)
 		return ;
 	index = x * 4 + (y * g->img->line_length);
 	i = -1;
 	while (++i < 4)
 		g->img->addr[index + i] = c[i];
-}
-
-int		move_player(int keycode, t_game *g_data)
-{
-	if (g_data->posy > g_data->p_data->map_y)
-		return (keycode);
-	if (g_data->posx > g_data->p_data->map_x[(int)g_data->posy])
-		return (keycode);
-	if (keycode == KEY_W)
-		move_up(g_data);
-	if (keycode == KEY_S)
-		move_down(g_data);
-	if (keycode == KEY_D)
-		move_right(g_data);
-	if (keycode == KEY_A)
-		move_left(g_data);
-	if (keycode == KEY_RIGHT)
-		rotate_right(g_data);
-	if (keycode == KEY_LEFT)
-		rotate_left(g_data);
-	if (keycode == KEY_ESC)
-		mlx_destroy_window(g_data->mlx->mlx, g_data->mlx->mlx_win);
-	return (keycode);
-}
-
-int		close_window(int keycode, t_game *g_data)
-{
-	if (keycode == KEY_ESC)
-	{
-		mlx_destroy_window(g_data->mlx->mlx, g_data->mlx->mlx_win);
-	}
-	return (keycode);
 }

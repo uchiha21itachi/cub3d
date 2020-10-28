@@ -1,5 +1,17 @@
-#ifndef KEYS_DARWIN_H
-# define KEYS_DARWIN_H
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   keys.h                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yassharm <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/10/07 19:10:25 by yassharm          #+#    #+#             */
+/*   Updated: 2020/10/07 19:10:27 by yassharm         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef KEYS_H
+# define KEYS_H
 # define KEY_A 0
 # define KEY_S 1
 # define KEY_D 2
@@ -49,4 +61,5 @@
 # define KEY_UP 126
 # define KEY_SPACE 49
 # define KEY_CTRL 256
+# define COLOR_CODE 0
 #endif
