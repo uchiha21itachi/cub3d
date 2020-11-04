@@ -70,7 +70,7 @@ void	value_miss_error(char c, t_parse *p_data)
 	else if (c == 't')
 	{
 		ft_putstr("Error-\n Cannot read or get the texture");
-		ft_putstr(" from specified location\n\n");
+		ft_putstr("from specified location\n\n");
 	}
 	else if (c == 'z')
 	{
@@ -92,6 +92,6 @@ void	malloc_error_messege(char c, t_parse *p_data)
 	else if (c == 'x')
 	{
 		ft_putstr("Error \n -- Problem in creating a new");
-		ft_putstr(" image \n Exiting the program\n");
+		ft_putstr("image \n Exiting the program\n");
 	}
 }

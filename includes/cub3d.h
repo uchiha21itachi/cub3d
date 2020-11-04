@@ -14,7 +14,7 @@
 # define CUB3D_H
 
 # include "../minilibx/mlx.h"
-# include "keys.h"
+# include "keys_linux.h"
 # include <stdio.h>
 # include <stdlib.h>
 # include <math.h>

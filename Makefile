@@ -17,13 +17,13 @@ CC=gcc
 
 
 NAME = cub3D
-CC = gcc  # C compiler
-# -fsanitize=address -g3
+CC = gcc -fsanitize=address -g3  # C compiler
+# 
 
 #CFLAGS = -Wall -Werror -Wextra -I. -Ilibft/. -c  # C flags
 INCLUDES =  -Isrc -Ignl # C flags
 
-CFLAGS	= -Wall -Werror -Wextra -D OS=$(OS)  $(INCLUDES)
+CFLAGS	= -Wall -Werror -Wextra -ggdb3 -Ofast -D OS=$(OS)  $(INCLUDES)
 
 RM = rm -f   # rm command
 
